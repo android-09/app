@@ -37,7 +37,7 @@
 main{
     height: 90vh;
     /* background-color: red; */
-    background-image: url('images/5532930.jpg');
+    background-image: url("/static/images/5532930.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     padding-top:100px;
