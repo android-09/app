@@ -14,3 +14,19 @@ def login_user(p):
     sql = 'SELECT fullname=%s, mypassword%s FROM user_info'
     cr.execute(sql, p)
     db.commit()
+
+
+def select_all():
+    sql = 'SELECT *FROM user_info'
+    cr = db.cursor()
+    cr.execute(sql)
+    ul = cr.fetchall()
+    db.commit()
+    return ul
+
+
+def delete_user(id):
+    sql = 'DELETE FROM user_info WHERE ID=%s'
+    cr = db.cursor()
+    cr.execute(sql, id)
+    db.commit()

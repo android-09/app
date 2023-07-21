@@ -1,5 +1,5 @@
 from flask import *
-from DBMS import insert_user, login_user
+from DBMS import insert_user, login_user, select_all, delete_user
 app = Flask(__name__)
 
 
@@ -33,7 +33,20 @@ def play_user():
 
     if p == login_user(p):
         pass
-    return render_template('profile.html')
+    return render_template('userPage.html')
+
+
+@app.route('/ulist')
+def usr_list():
+    ul = select_all()
+    return render_template('userlist.html', ulist=ul)
+
+
+@app.route('/deluser', methods=['GET'])
+def del_user():
+    id = request.args.get('id')
+    delete_user(id)
+    return redirect('/ulist')
 
 
 if __name__ == '__main__':

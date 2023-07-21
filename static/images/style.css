@@ -26,9 +26,11 @@
     flex-direction: row;
     padding: 20px;
 }
+
 .nav-ul li{
   list-style: none;
 }
+
 .nav-ul li a{
     text-decoration: none;
     color: white;
@@ -41,8 +43,6 @@ main{
     background-repeat: no-repeat;
     background-size: cover;
     padding-top:100px;
-
-
 }
 #mainDiv{
     width: 80vw;
@@ -54,6 +54,58 @@ main{
     padding: 20px 10px;
     margin: 0px auto;
     border-radius: 20px;
+}
+
+#mainDivInUserPage{
+    width: 80vw;
+    /* height: 50vh; */
+    background-color:rgba(0, 0, 0, 0.372);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 10px 10px;
+    margin: 0px auto;
+    border-radius: 20px;
+    color: white;
+}
+#mainDivInUserPage h1{
+    font-size: 50px;
+    margin: 20px 0px;
+}
+.category{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+
+}
+.categorydiv{
+    width: 300px;
+    height: 100px;
+    border: 2px solid white;
+    /* background-color: white; */
+}
+.para{
+    font-size: 40px;
+    margin: 20px 0px;
+
+}
+.games{
+    display: flex;
+    flex-direction:row ;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.btn_user{
+    width: 100px;
+    background-color: cyan;
+    border-radius: 10px;
+    padding: 10px 5px;
+    margin: 10px auto;
 }
 .imgDiv{
     /* width: 100px; */
