@@ -100,6 +100,9 @@ main{
     align-items: center;
     width: 100%;
 }
+.gameBox{
+    width: 400px;
+}
 .btn_user{
     width: 100px;
     background-color: cyan;
