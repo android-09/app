@@ -73,6 +73,44 @@ main{
     font-size: 50px;
     margin: 20px 0px;
 }
+
+#mainDivAdmin{
+    width: 80vw;
+    margin: 20px auto;
+    color: white;
+}
+
+#userpara{
+    font-size: 70px;
+    margin-bottom:20px;
+    font-weight: 800;
+}
+.adminData{
+    margin-bottom: 30px;
+}
+.adminData p{
+    font-size: 18px;
+    padding: 4px 0px;
+}
+.btn_admin{
+    padding: 13px;
+    width: 10vw;
+    background-color: rgba(46, 178, 249, 0.957);
+    color: black;
+    border: none;
+    border-radius: 5px;
+}
+.btn_admin li{
+    list-style: none;
+    color: black;
+
+
+}
+.btn_admin li a{
+    text-decoration: none;
+
+
+}
 .category{
     display: flex;
     flex-direction: row;

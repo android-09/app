@@ -31,9 +31,19 @@ def play_user():
     p = (name, passwd)
     login_user(p)
 
-    if p == login_user(p):
+    if name == 'omar shaikh' and passwd == 'fsdcas':
+        return render_template('admin.html')
+
+    elif p == login_user(p):
         pass
     return render_template('userPage.html')
+
+
+# @app.route('/admin', methods=['POST'])
+# def admin():
+#     name=request.form['name']
+#     password=request
+#     return render_template('admin.html')
 
 
 @app.route('/ulist')
