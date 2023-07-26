@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/images/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <img src="/static/images/quiz.png" alt="" class="logo" />
+        <div class="navbar-div">
+          <ul class="nav-ul">
+            <li><a href="#">HOME</a></li>
+            <li><a href="#">ABOUT</a></li>
+            <li><a href="#">MORE</a></li>
+            <li><a href="#">CONTACT-US</a></li>
+            <li><a href="/login">LOGIN</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div id="mainDiv">
+        <div class="imgDiv"><img src="/static/images/quiz.png" alt="" /></div>
+        <div class="infoDiv">
+          <form method="POST" action="updateuserdata">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th><p>update user:</p></th>
+                </tr>
+              </thead>
+
+              <tr>
+                <td>
+                  <input
+                    placeholder="Id"
+                    type="text"
+                    value="{{d[0]}}"
+                    name="id"
+                    id=""
+                    readonly
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <input
+                    placeholder="Name"
+                    type="text"
+                    value="{{d[1]}}"
+                    name="name"
+                    id=""
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <input
+                    placeholder="Email"
+                    type="text"
+                    value="{{d[2]}}"
+                    name="email"
+                    id=""
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <input
+                    placeholder="Password"
+                    type="password"
+                    value="{{d[3]}}"
+                    name="password"
+                    id=""
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td><button>Submit</button></td>
+              </tr>
+            </table>
+          </form>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div><p>copyright</p></div>
+    </footer>
+  </body>
+</html>

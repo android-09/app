@@ -30,3 +30,20 @@ def delete_user(id):
     cr = db.cursor()
     cr.execute(sql, id)
     db.commit()
+
+
+def selectbyid(id):
+    sql = 'SELECT * FROM user_info where ID=%s'
+    cr = db.cursor()
+    cr.execute(sql, id)
+    ul = cr.fetchall()
+    print(ul)
+    db.commit()
+    return ul[0]
+
+
+def update_user(t):
+    sql = 'update user_info set fullname=%s,email=%s,mypassword=%s where ID=%s'
+    cr = db.cursor()
+    cr.execute(sql, t)
+    db.commit()

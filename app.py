@@ -1,5 +1,5 @@
 from flask import *
-from DBMS import insert_user, login_user, select_all, delete_user
+from DBMS import insert_user, login_user, select_all, delete_user, update_user, selectbyid
 app = Flask(__name__)
 
 
@@ -10,11 +10,11 @@ def home():
 
 @app.route('/adduser', methods=['POST'])
 def adduser():
-    # id = request.form['id']
+    id = request.form['id']
     name = request.form['name']
     email = request.form['email']
     passwd = request.form['password']
-    t = (name, email, passwd)
+    t = (id, name, email, passwd)
     insert_user(t)
     return redirect('/')
 
@@ -57,6 +57,24 @@ def del_user():
     id = request.args.get('id')
     delete_user(id)
     return redirect('/ulist')
+
+
+@app.route("/ubtuser")
+def upduser():
+    id = request.args.get("id")
+    data = selectbyid(id)
+    return render_template("updateregister.html", d=data)
+
+
+@app.route("/updateuserdata", methods=["POST"])
+def updateuserdata():
+    id = request.form['id']
+    name = request.form['name']
+    email = request.form['email']
+    passwd = request.form['password']
+    t = (name, email, passwd, id)
+    update_user(t)
+    return render_template('admin.html')
 
 
 if __name__ == '__main__':
