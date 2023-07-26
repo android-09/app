@@ -14,6 +14,9 @@
   </head>
   <body>
     <header>
+      {%if msg%}
+      <span>{{msg}}</span>
+      {%endif%}
       <nav class="navbar">
         <img src="/static/images/quiz.png" alt="" class="logo" />
         <div class="navbar-div">

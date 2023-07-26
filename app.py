@@ -10,13 +10,14 @@ def home():
 
 @app.route('/adduser', methods=['POST'])
 def adduser():
-    id = request.form['id']
+    # id = request.form['id']
     name = request.form['name']
     email = request.form['email']
     passwd = request.form['password']
-    t = (id, name, email, passwd)
+    t = (name, email, passwd)
     insert_user(t)
-    return redirect('/')
+
+    return render_template('home.html', msg='register successfull')
 
 
 @app.route('/login')
@@ -28,6 +29,7 @@ def login_info():
 def play_user():
     name = request.form['name']
     passwd = request.form['password']
+    # request.session['uid']
     p = (name, passwd)
     login_user(p)
 
