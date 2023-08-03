@@ -1,12 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/static/images/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet" />
+    <style>
+        body{
+            background-color: blueviolet;
+        }
+        .question{
+            width: 80%;
+            font-size: 50px;
+            letter-spacing: 10px;
+            padding: 30px;
+            margin: auto;
+            text-align: center;
+            margin-top: 50px;
+            color: whitesmoke;
+            border: 3px solid whitesmoke;
+            border-radius: 50px;
+        }
+        .options{
+            width: 40%;
+            border: 2px solid whitesmoke;
+            border-radius: 50px;
+            float: left;
+            margin: 30px;
+            font-size: 30px;
+            padding: 20px;
+        }
+        .questionset a{
+            margin: auto;
+            color: white;
+        }
+
+    
+    </style>
 </head>
+
 <body>
-    <h1>hello
-    </h1>
+    {%include "navbar.html"%}
+    <h1 style="color: white; text-align: left;">Answer the follwoing question to win money !!!</h1>
+    <div class="box">
+        <div class="question">
+            {{q}}
+        </div>
+        <div class="questionset">
+        <a href="/submit?uans={{op.0}}"><div class="options">{{op.0}}</div></a>
+        <a href="/submit?uans={{op.1}}"><div class="options">{{op.1}}</div></a>
+        <a href="/submit?uans={{op.2}}"><div class="options">{{op.2}}</div></a>
+        <a href="/submit?uans={{op.3}}"><div class="options">{{op.3}}</div></a>
+    </div>
+    </div>
 </body>
+
 </html>

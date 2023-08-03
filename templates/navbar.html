@@ -1,0 +1,38 @@
+<header>
+    {%if msg%}
+    <span>{{msg}}</span>
+    {%endif%}
+    <nav class="navbar">
+        <a href="/"><img src="/static/images/quiz.png" alt="" class="logo" /></a>
+        <div class="navbar-div">
+            <ul class="nav-ul">
+               
+                
+        
+
+                {% if session.id %}
+                {% if session.isadmin == 1 %}
+                <li><a href="/profile">Details</a></li>
+                <li><a href="/logout">LOGOUT</a></li>
+                <li><a href="/ulist">User-LIST</a></li>
+                <li><a href="/profile"><span>!Hello &nbsp; {{ session.uname.upper() }}</span></a></li>
+                
+                {% else %}
+                <li><a href="/profile">Details</a></li>
+                <li><a href="/logout">LOGOUT</a></li>
+                <li><a href="/profile"><span>!Hello &nbsp; {{ session.uname.upper() }}</span></a></li>
+                {% endif %}
+                {% else %}
+                <li><a href="/">REGISTER</a></li>
+                <li><a href="/login" id="log">LOGIN</a></li>
+                {% endif %}
+
+
+
+
+
+            </ul>
+        </div>
+    </nav>
+</header>
+<script src="/static/main.js"></script>

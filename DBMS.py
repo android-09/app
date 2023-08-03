@@ -1,6 +1,6 @@
 import pymysql as conn
 db = conn.connect(host='localhost', user='root',
-                  password='Omar@1234', port=3306, database='quiz_app')
+                  password='Omar@1234', port=3306, database='quiz_play')
 cr = db.cursor()
 
 
@@ -11,9 +11,13 @@ def insert_user(t):
 
 
 def login_user(p):
-    sql = 'SELECT fullname=%s, mypassword%s FROM user_info'
+    sql = 'SELECT id,fullname,mypassword,email,is_admin   FROM user_info where fullname=%s and mypassword=%s'
     cr.execute(sql, p)
-    db.commit()
+    data = cr.fetchall()
+    if data:
+        return data
+    else:
+        return None
 
 
 def select_all():
@@ -43,7 +47,38 @@ def selectbyid(id):
 
 
 def update_user(t):
+    sql = 'update user_info set fullname=%s,email=%s,mypassword=%s,is_admin=%s where ID=%s'
+    cr = db.cursor()
+    cr.execute(sql, t)
+    db.commit()
+
+
+def updateuserdb(t):
     sql = 'update user_info set fullname=%s,email=%s,mypassword=%s where ID=%s'
     cr = db.cursor()
     cr.execute(sql, t)
     db.commit()
+
+
+def insertrounds(t):
+    sql = 'insert into gameplay (user_id,price) values(%s,%s)'
+    cr = db.cursor()
+    cr.execute(sql, t)
+    db.commit()
+
+
+def getamt(id):
+    sql = 'select sum(price) from gameplay where user_id=%s'
+    cr = db.cursor()
+    cr.execute(sql, id)
+    db.commit()
+    price = cr.fetchall()
+    sql = "delete from gameplay where user_id=%s"
+    cr = db.cursor()
+    cr.execute(sql, id)
+    db.commit()
+    print(price)
+    if price[0][0]:
+        return int(price[0][0])
+    else:
+        return 0

@@ -1,0 +1,61 @@
+<head>
+    <link rel="stylesheet" href="/static/images/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+</head>
+
+{%include "navbar.html"%}
+<main>
+  <div id="mainDiv">
+    <div class="imgDiv"><img src="/static/images/quiz.png" alt="" /></div>
+    <div class="infoDiv">
+      <form method="POST" action="updateuser">
+        <table class="table">
+          <thead>
+            <tr>
+              <th><p>Edit Details:</p></th>
+            </tr>
+          </thead>
+
+          <!-- <tr>
+                    
+                    <td><input placeholder="Id" type="text" name="id" id=""></td>
+                </tr> -->
+          <tr>
+            <td>
+              <input placeholder="Name" type="text" name="name" id="" value="{{session.uname}}" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input placeholder="Email" type="text" name="email" id="" value="{{session.email}}" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input
+                placeholder="Password"
+                type="password"
+                name="password"
+                id=""
+                value="{{session.password}}"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td><button>Submit</button></td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </div>
+</main>
+<footer>
+  <div><p>copyright</p></div>
+</footer>
+</body>
+</html>

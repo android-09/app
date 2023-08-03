@@ -13,31 +13,13 @@
     />
   </head>
   <body>
-    <header>
-      <nav class="navbar">
-        <img src="/static/images/quiz.png" alt="" class="logo" />
-        <div class="navbar-div">
-          <ul class="nav-ul">
-            <li><a href="#">HOME</a></li>
-            <li><a href="#">ABOUT</a></li>
-            <li><a href="#">MORE</a></li>
-            <li><a href="#">CONTACT-US</a></li>
-            <li><a href="/login">LOGIN</a></li>
-          </ul>
-        </div>
-      </nav>
-    </header>
+    {%include "navbar.html"%}
     <main>
       <div id="mainDivAdmin">
-        <div id="userpara"><p>Hello, User</p></div>
-        <div class="adminData">
-          <p>Name:Omar Shaikh</p>
-          <p>Age:22 years old</p>
-          <p>Email:omarshaikh508@gmail.com</p>
-          <p>Contact-Us:9999999999</p>
-        </div>
+        <div id="userpara"><p>Hello, {{session.uname.upper()}}</p></div>
         <button class="btn_admin">
           <a href="ulist">View all users</a>
+          
         </button>
       </div>
     </main>

@@ -213,3 +213,8 @@ footer{
     background-color: black;
     color: white;
 }
+
+td input{
+    color: white;
+     padding-left: 10px;
+}

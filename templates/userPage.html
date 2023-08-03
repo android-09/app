@@ -13,29 +13,10 @@
     />
   </head>
   <body>
-    <header>
-      <nav class="navbar">
-        <img src="/static/images/quiz.png" alt="" class="logo" />
-        <div class="navbar-div">
-          <ul class="nav-ul">
-            <li><a href="#">HOME</a></li>
-            <li><a href="#">ABOUT</a></li>
-            <li><a href="#">MORE</a></li>
-            <li><a href="#">CONTACT-US</a></li>
-            <li><a href="/login">LOGIN</a></li>
-            <li><a href="/ulist">USER-LIST</a></li>
-          </ul>
-        </div>
-      </nav>
-    </header>
+    {%include "navbar.html"%}
     <main>
       <div id="mainDivInUserPage">
-        <h1>Hello User</h1>
-        <!-- <div class="category">
-          <div class="categorydiv">c1</div>
-          <div class="categorydiv">c2</div>
-          <div class="categorydiv">c3</div>
-        </div> -->
+        <h1>Hello {{session.uname.upper()}}</h1>
         <div class="para"><p>wanna play, click the button below</p></div>
         <div class="games">
           <div class="gameBox">
@@ -55,26 +36,9 @@
               storytelling, well-developed characters, and epic battles that
               have captured the hearts of fans across generations.
             </p>
-            <button class="btn_user">Play</button>
+            <button class="btn_user"><a href="/play">Play</a></button>
           </div>
-          <div class="gameBox">
-            <p>Attack on Titan</p>
-            <p>
-              "Attack on Titan" (Shingeki no Kyojin) is a Japanese anime and
-              manga series by Hajime Isayama, set in a world where humanity
-              struggles for survival against giant humanoid creatures known as
-              Titans. The story follows Eren Yeager, Mikasa Ackerman, and Armin
-              Arlert as they join the military to combat the Titans after their
-              hometown is devastated. Eren's ability to transform into a Titan
-              makes him a crucial asset in the fight. The series captivates
-              audiences with its gripping action, intricate plot, and character
-              development, gradually unveiling the mysteries surrounding the
-              Titans and the history of their world. Since its debut in 2009 as
-              a manga and 2013 as an anime, "Attack on Titan" has garnered
-              immense acclaim and a dedicated global fanbase.
-            </p>
-            <button class="btn_user">Play</button>
-          </div>
+          
           <!-- <div class="gameBox"><button class="btn_user">Play</button></div>
           <div class="gameBox"><button class="btn_user">Play</button></div> -->
         </div>

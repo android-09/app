@@ -16,20 +16,7 @@
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <img src="/static/images/quiz.png" alt="" class="logo">
-            <div class="navbar-div">
-                <ul class="nav-ul">
-                    <li>HOME</li>
-                    <li>ABOUT</li>
-                    <li>MORE</li>
-                    <li>CONTACT-US</li>
-
-                </ul>
-            </div>
-        </nav>
-    </header>
+    {%include "navbar.html"%}
     <main>
         <div id="mainDiv">
             <form method="POST" action="adduser">
