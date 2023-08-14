@@ -108,7 +108,7 @@ def play_user():
             print(data[-1])
             if data[-1] == 0:
                 session["isadmin"] = 0
-                return redirect("/userpage")
+                return redirect("/quiztop")
             else:
                 session["isadmin"] = 1
                 return redirect("/admin")
@@ -177,6 +177,28 @@ def sub():
     if session.get("id"):
         return redirect("/play")
 
+
+### for frontend
+
+# クイズの個別問題を表示
+@app.route("/quizdetail")
+def quiz():
+    quiz_id = request.args.get("quiz_id")
+    # クイズのタイトルを取得
+    quiz_title = select_quiz_title(quiz_id)
+    # クイズの詳細を取得
+    quiz_detail = select_quiz_detail(quiz_id)
+    return render_template("quizdetail.html", quiz_title=quiz_title, quiz_detail=quiz_detail)
+
+# クイズページのトップページ
+@app.route("/quiztop")
+def quiztop():
+    user_id = session.get("id")
+    # userの履歴を取得
+    user_history = select_user_history(user_id)
+    # すべてのクイズを取得
+    quiz_all = select_quiz_all()
+    return render_template("quiztop.html", user_history=user_history, quiz_all=quiz_all)
 
 if __name__ == '__main__':
     app.run(debug=True, port=4000)

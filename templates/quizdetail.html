@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="/static/images/style.css" />
+</head>
+
+<body>
+  <!-- ナビゲーション -->
+  {%include "navbar.html"%}
+  <!-- タイトル -->
+  <h1>クイズのタイトル</h1>
+  <p>{{quiz_title[1]}}</p>
+  <!-- 難しさ -->
+  <h2>クイズの難易度</h2>
+  <p>{{quiz_title[2]}}</p>
+  <!-- 実際の問題 -->
+  {% for quiz in quiz_detail %}
+    <div>
+      <h2>問題: {{quiz[2]}}</h2>
+      <ul>
+        <li>選択肢1:{{quiz[3]}}</li>
+        <li>選択肢2:{{quiz[4]}}</li>
+        <li>選択肢3:{{quiz[5]}}</li>
+      </ul>
+    </div>
+  {% endfor %}
+
+
+</body>
+
+</html>

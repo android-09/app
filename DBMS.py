@@ -84,3 +84,40 @@ def getamt(id):
         return int(price[0][0])
     else:
         return 0
+    
+
+# すべてのクイズを取得
+def select_quiz_all():
+    sql = 'SELECT * FROM quiz_title'
+    cr = db.cursor()
+    cr.execute(sql)
+    db.commit()
+    ul = cr.fetchall()
+    return ul
+
+# クイズのタイトル（個別）を取得
+def select_quiz_title(quiz_id):
+    sql = 'SELECT * FROM quiz_title WHERE ID=%s'
+    cr = db.cursor()
+    cr.execute(sql,quiz_id)
+    db.commit()
+    ul = cr.fetchall()
+    return ul[0]
+
+# クイズの詳細を取得
+def select_quiz_detail(quiz_id):
+    sql = 'SELECT * FROM quiz_detail WHERE quiz_id=%s'
+    cr = db.cursor()
+    cr.execute(sql,quiz_id)
+    db.commit()
+    ul = cr.fetchall()
+    return ul
+
+# userの履歴を取得
+def select_user_history(user_id):
+    sql = 'SELECT * FROM user_history WHERE user_id=%s'
+    cr = db.cursor()
+    cr.execute(sql,user_id)
+    db.commit()
+    ul = cr.fetchall()
+    return ul

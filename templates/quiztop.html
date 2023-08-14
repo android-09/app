@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="/static/images/style.css" />
+  <style>
+    td{
+      width: 150px;
+      border: 1px solid;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ナビゲーション -->
+  {%include "navbar.html"%}
+  <h2>あなたがチャレンジした問題</h2>
+  <table>
+    <tr>
+      <td>時間</td>
+      <td>タイトル</td>
+      <td>正解率</td>
+    </tr>
+    {% for history in user_history %}
+    <tr>
+      <td>{{history[4]}}</td>
+      <td>{{history[2]}}</td>
+      <td>{{history[3]}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+    
+  <h2>すべての検定</h2>
+  <ul>
+    {% for quiz in quiz_all %}
+      <li>
+        問題：{{quiz[1]}}
+        <a href="/quizdetail?quiz_id={{quiz[0]}}">クイズをする</a>
+      </li>
+    {% endfor %}
+  </ul>
+</body>
+
+</html>
