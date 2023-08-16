@@ -200,5 +200,18 @@ def quiztop():
     quiz_all = select_quiz_all()
     return render_template("quiztop.html", user_history=user_history, quiz_all=quiz_all)
 
+# クイズのタイトル（例：はっとりくん上級）をいれるところ
+# @app.route("/quiztitleadmin")
+# def quiztitleadmin():
+    # クイズのタイトルを取得
+    # quiztittleadmin.htmlのテンプレートを作ってそこにデータを送る
+
+# クイズの問題をいれるところ
+# @app.route("/quizdetailadmin")
+# def quizdetailadmin():
+    # クイズの問題を取得
+    # quizdetailadmin.htmlのテンプレートを作ってそこにデータを送る
+
+
 if __name__ == '__main__':
     app.run(debug=True, port=4000)
