@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="/static/css/quiztitleadmin.css">
+	<title>Quiz Titles Admin</title>
+</head>
+<body>
+	<h1>Quiz Titles</h1>
+	<table border="1">
+		<tr>
+			<th>ID</th>
+			<th>Title</th>
+			<th>Difficulty</th>
+			<th>Image</th>
+			<th>Actions</th>
+		</tr>
+		{% for title in titles %}
+		<tr>
+			<td>{{ title[0] }}</td>
+			<td>{{ title[1] }}</td>
+			<td>{{ title[2]}}</td>
+			<td>
+				<img src="/static/{{title[3]}}"  width="50" height="50" alt="">
+			</td>
+			<td class="action-container">
+			<form class="action-form" action="/quiztitleadmin/edit/{{ title[0] }}" method="post">
+				<input type="text" name="title" value="{{ title[1] }}">
+				<input type="number" name="difficulty" value="{{ title[2] }}">
+				<input type="hidden" name="old_image_path" value="{{ title[3] }}">
+				<input type="file" name="image_file">
+				<input type="submit" value="Edit">
+			</form>
+			<a href="/quiztitleadmin/delete/{{ title[0] }}">Delete</a>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+	<h2>Add New Title</h2>
+	<form id="adminForm" action="/quiztitleadmin/add" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="action" value="add">
+		<input type="text" name="title" placeholder="Title">
+		<input type="number" name="difficulty" placeholder="Difficulty">
+		<input type="file" name="image_file" placeholder="Image URL">
+		<input type="submit" value="Add">
+	</form>
+</body>
+</html>

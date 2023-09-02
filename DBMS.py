@@ -121,3 +121,23 @@ def select_user_history(user_id):
     db.commit()
     ul = cr.fetchall()
     return ul
+
+
+
+def add_title(data):
+    with db.cursor() as cursor:
+        sql = "INSERT INTO quiz_title (title, difficulty, image) VALUES (%s, %s, %s)"
+        cursor.execute(sql, (data['title'], data['difficulty'], data['image']))
+        db.commit()
+
+def edit_title(data):
+    with db.cursor() as cursor:
+        sql = "UPDATE quiz_title SET title=%s, difficulty=%s, image=%s WHERE ID=%s"
+        cursor.execute(sql, (data['title'], data['difficulty'], data['image'], data['ID']))
+        db.commit()
+
+def delete_title(id):
+    with db.cursor() as cursor:
+        sql = "DELETE FROM quiz_title WHERE ID=%s"
+        cursor.execute(sql, id)
+        db.commit()

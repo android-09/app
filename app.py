@@ -1,3 +1,5 @@
+import os
+import uuid
 import random as r
 from flask import *
 from DBMS import *
@@ -200,11 +202,62 @@ def quiztop():
     quiz_all = select_quiz_all()
     return render_template("quiztop.html", user_history=user_history, quiz_all=quiz_all)
 
-# クイズのタイトル（例：はっとりくん上級）をいれるところ
-# @app.route("/quiztitleadmin")
-# def quiztitleadmin():
-    # クイズのタイトルを取得
-    # quiztittleadmin.htmlのテンプレートを作ってそこにデータを送る
+
+### quiz title admin
+
+def save_file(file):
+    UPLOAD_FOLDER = 'static/images/title/'
+    ext = os.path.splitext(file.filename)[1]
+    filename = "images/title/" + str(uuid.uuid4()) + ext
+    file_path = os.path.join(UPLOAD_FOLDER, filename.split('/')[-1])  # Ensure it saves in 'static/images/title/'
+    file.save(file_path)
+    return filename
+
+@app.route("/quiztitleadmin")
+def quiztitleadmin():
+    titles = select_quiz_all()
+    return render_template('quiztitleadmin.html', titles=titles)
+
+@app.route("/quiztitleadmin/add", methods=['POST'])
+def quiztitleadmin_add():
+    image_file = request.files.get('image_file')
+    if image_file:
+            image_path = save_file(image_file)
+            # image_file.save(image_path)
+    data = {
+        'title': request.form['title'],
+        'difficulty': request.form['difficulty'],
+        'image': image_path
+    }
+    add_title(data)
+    return redirect("/quiztitleadmin")
+
+@app.route("/quiztitleadmin/edit/<int:id>", methods=['POST'])
+def quiztitleadmin_edit(id):
+    data = {
+        'ID': id,
+        'title': request.form['title'],
+        'difficulty': request.form['difficulty']
+    }
+    
+    image_file = request.files.get('image_file')
+    if image_file and image_file.filename != '':
+        old_image_path = request.form['old_image_path']
+        if old_image_path and os.path.exists(old_image_path):
+            os.remove(old_image_path)
+
+        image_path = save_file(image_file)
+        data['image'] = image_path
+    else:
+        data['image'] = request.form['old_image_path']
+        
+    edit_title(data)
+    return redirect("/quiztitleadmin")
+
+@app.route("/quiztitleadmin/delete/<int:id>")
+def quiztitleadmin_delete(id):
+    delete_title(id)
+    return redirect("/quiztitleadmin")
 
 # クイズの問題をいれるところ
 # @app.route("/quizdetailadmin")
