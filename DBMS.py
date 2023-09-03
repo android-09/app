@@ -1,4 +1,5 @@
 import pymysql as conn
+import os
 #db = conn.connect(host='localhost', user='root',
 #                  password='Omar@1234', port=3306, database='quiz_play')
 db = conn.connect(host='127.0.0.1', user='root',
@@ -138,6 +139,17 @@ def edit_title(data):
 
 def delete_title(id):
     with db.cursor() as cursor:
+        sql = "SELECT image FROM quiz_title WHERE ID=%s"
+        cursor.execute(sql, (id,))
+        result = cursor.fetchone()
+        if result:
+            image_path = os.path.join('static', result[0])
+            # 2. Delete the image from /static/images/title directory
+            if os.path.exists(image_path):
+                os.remove(image_path)
+
+    # Now, delete the title from the database as it was done originally
+    with db.cursor() as cursor:
         sql = "DELETE FROM quiz_title WHERE ID=%s"
-        cursor.execute(sql, id)
+        cursor.execute(sql, (id,))
         db.commit()

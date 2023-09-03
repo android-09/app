@@ -244,7 +244,7 @@ def quiztitleadmin_edit(id):
     if image_file and image_file.filename != '':
         old_image_path = request.form['old_image_path']
         if old_image_path and os.path.exists(old_image_path):
-            os.remove(old_image_path)
+            os.remove("/static/" + old_image_path)
 
         image_path = save_file(image_file)
         data['image'] = image_path
