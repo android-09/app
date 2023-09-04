@@ -1,34 +1,35 @@
 import random as r
 from flask import *
 from DBMS import *
+
 app = Flask(__name__)
 app.secret_key = "arfa"
 
 
-@app.route('/')
+@app.route("/")
 def home():
-    if (session.get("id")):
+    if session.get("id"):
         return redirect("/userpage")
 
     else:
-        return render_template('home.html')
+        return render_template("home.html")
 
 
-@app.route('/adduser', methods=['POST'])
+@app.route("/adduser", methods=["POST"])
 def adduser():
     # id = request.form['id']
-    name = request.form['name']
-    email = request.form['email']
-    passwd = request.form['password']
+    name = request.form["name"]
+    email = request.form["email"]
+    passwd = request.form["password"]
     t = (name, email, passwd)
     insert_user(t)
 
-    return render_template('home.html', msg='register successfull')
+    return render_template("home.html", msg="register successfull")
 
 
-@app.route('/login')
+@app.route("/login")
 def login_info():
-    return render_template('login.html')
+    return render_template("login.html")
 
 
 @app.route("/updateform", methods=["POST"])
@@ -41,9 +42,9 @@ def updateform():
 
 @app.route("/updateuser", methods=["POST"])
 def updateuserview():
-    name = request.form['name']
-    email = request.form['email']
-    passwd = request.form['password']
+    name = request.form["name"]
+    email = request.form["email"]
+    passwd = request.form["password"]
     id = session.get("id")
     t = (name, email, passwd, id)
     updateuserdb(t)
@@ -63,7 +64,7 @@ def userprofile():
 
 @app.route("/admin")
 def admin():
-    if (session.get("isadmin")):
+    if session.get("isadmin"):
         return render_template("admin.html")
     else:
         return redirect("/")
@@ -71,7 +72,7 @@ def admin():
 
 @app.route("/logout")
 def lgot():
-    if (session.get("id")):
+    if session.get("id"):
         session.clear()
         return redirect("/login")
     else:
@@ -87,10 +88,10 @@ def userpage():
         return render_template("home.html", msg="login is must")
 
 
-@app.route('/playuser', methods=['POST'])
+@app.route("/playuser", methods=["POST"])
 def play_user():
-    name = request.form['name']
-    passwd = request.form['password']
+    name = request.form["name"]
+    passwd = request.form["password"]
     # request.session['uid']
     p = (name, passwd)
     data = login_user(p)
@@ -118,20 +119,20 @@ def play_user():
         return redirect("/login")
 
 
-@app.route('/ulist')
+@app.route("/ulist")
 def usr_list():
-    if (session["isadmin"]):
+    if session["isadmin"]:
         ul = select_all()
-        return render_template('userlist.html', ulist=ul)
+        return render_template("userlist.html", ulist=ul)
     else:
         return redirect("/")
 
 
-@app.route('/deluser', methods=['GET'])
+@app.route("/deluser", methods=["GET"])
 def del_user():
-    id = request.args.get('id')
+    id = request.args.get("id")
     delete_user(id)
-    return redirect('/ulist')
+    return redirect("/ulist")
 
 
 @app.route("/ubtuser")
@@ -143,24 +144,29 @@ def upduser():
 
 @app.route("/updateuserdata", methods=["POST"])
 def updateuserdata():
-    user_id = request.form['id']
-    name = request.form['name']
-    email = request.form['email']
-    passwd = request.form['password']
+    user_id = request.form["id"]
+    name = request.form["name"]
+    email = request.form["email"]
+    passwd = request.form["password"]
     admin = 0
     if "uadmin" in request.form:
         admin = 1
     t = (name, email, passwd, admin, user_id)
     update_user(t)
-    return render_template('admin.html')
+    return render_template("admin.html")
 
 
 @app.route("/play")
 def play():
     if session.get("id"):
         operators = ("+", "-", "*", "//")
-        question = str(r.randint(1, 9))+r.choice(operators) + \
-            str(r.randint(1, 9))+r.choice(operators)+str(r.randint(1, 9))
+        question = (
+            str(r.randint(1, 9))
+            + r.choice(operators)
+            + str(r.randint(1, 9))
+            + r.choice(operators)
+            + str(r.randint(1, 9))
+        )
         ans = eval(question)
         session["ans"] = ans
         print(question)
@@ -180,6 +186,7 @@ def sub():
 
 ### for frontend
 
+
 # クイズの個別問題を表示
 @app.route("/quizdetail")
 def quiz():
@@ -189,6 +196,7 @@ def quiz():
     # クイズの詳細を取得
     quiz_detail = select_quiz_detail(quiz_id)
     return render_template("quizdetail.html", quiz_title=quiz_title, quiz_detail=quiz_detail)
+
 
 # クイズページのトップページ
 @app.route("/quiztop")
@@ -200,18 +208,50 @@ def quiztop():
     quiz_all = select_quiz_all()
     return render_template("quiztop.html", user_history=user_history, quiz_all=quiz_all)
 
-# クイズのタイトル（例：はっとりくん上級）をいれるところ
-# @app.route("/quiztitleadmin")
-# def quiztitleadmin():
-    # クイズのタイトルを取得
-    # quiztittleadmin.htmlのテンプレートを作ってそこにデータを送る
-
 # クイズの問題をいれるところ
-# @app.route("/quizdetailadmin")
-# def quizdetailadmin():
-    # クイズの問題を取得
-    # quizdetailadmin.htmlのテンプレートを作ってそこにデータを送る
+@app.route("/quizdetailadmin")
+def quizdetailadmin():
+    quiz_all = select_quiz_all()
+    select_alldetail = get_alldetail()
+    return render_template("quizdetailadmin.html", quiz_all=quiz_all, select_alldetail=select_alldetail)
 
 
-if __name__ == '__main__':
+@app.route("/adddetailadmin", methods=["POST"])
+def adddetailadmin():
+    if request.method == "POST":
+        quiz_id = request.form["quiz_id"]
+        question = request.form["question"]
+        selection1 = request.form["selection1"]
+        selection2 = request.form["selection2"]
+        selection3 = request.form["selection3"]
+        selection4 = request.form["selection4"]
+        comment = request.form["comment"]
+        image = request.form["image"]
+        q = (quiz_id, question, selection1, selection2, selection3, selection4, comment, image)
+
+        insert_detail(q)
+        return redirect(url_for("quizdetailadmin"))
+    # return render_template("quizdetailadmin.html")
+
+
+@app.route("/updatedetail", methods=["POST"])
+def updatedetail():
+    if request.method == "POST":
+        update_id = request.form["update_id"]
+        update_quiz_id = request.form["update_quiz_id"]
+        update_question = request.form["update_question"]
+        update_selection1 = request.form["update_selection1"]
+        update_selection2 = request.form["update_selection2"]
+        update_selection3 = request.form["update_selection3"]
+        update_selection4 = request.form["update_selection4"]
+        update_comment = request.form["update_comment"]
+        update_image = request.form["update_image"]
+        u = (update_quiz_id,update_question,update_selection1,update_selection2,
+            update_selection3,update_selection4,update_comment,update_image,update_id,
+        )
+        update_detail(u)
+        return redirect("/quizdetailadmin")
+
+
+if __name__ == "__main__":
     app.run(debug=True, port=4000)
