@@ -1,8 +1,7 @@
 import pymysql as conn
 
-db = conn.connect(host="localhost", user="root", password="appkinak0le", port=3306, database="quiz_play")
-# db = conn.connect(host='127.0.0.1', user='root',
-#                   port=3306, database='quiz_play')
+db = conn.connect(host='127.0.0.1', user='root',
+                  port=3306, database='quiz_play')
 cr = db.cursor()
 
 
