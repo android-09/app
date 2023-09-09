@@ -217,7 +217,7 @@ def save_file(file):
     UPLOAD_FOLDER = 'static/images/title/'
     ext = os.path.splitext(file.filename)[1]
     filename = "images/title/" + str(uuid.uuid4()) + ext
-    file_path = os.path.join(UPLOAD_FOLDER, filename.split('/')[-1])  # Ensure it saves in 'static/images/title/'
+    file_path = os.path.join(UPLOAD_FOLDER, filename.split('/')[-1])
     file.save(file_path)
     return filename
 
