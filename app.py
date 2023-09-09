@@ -229,9 +229,11 @@ def quiztitleadmin():
 @app.route("/quiztitleadmin/add", methods=['POST'])
 def quiztitleadmin_add():
     image_file = request.files.get('image_file')
-    if image_file:
-            image_path = save_file(image_file)
-            # image_file.save(image_path)
+    if image_file.filename != '':
+        image_path = save_file(image_file)
+    else:
+        image_path = ''
+    
     data = {
         'title': request.form['title'],
         'difficulty': request.form['difficulty'],

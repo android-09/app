@@ -146,10 +146,13 @@ def delete_title(id):
         sql = "SELECT image FROM quiz_title WHERE ID=%s"
         cursor.execute(sql, (id,))
         result = cursor.fetchone()
-        if result:
+        
+        image_path = None
+        if result and result[0]:
             image_path = os.path.join('static', result[0])
-            if os.path.exists(image_path):
-                os.remove(image_path)
+        
+        if image_path and os.path.isfile(image_path):
+            os.remove(image_path)
 
 
     with db.cursor() as cursor:
