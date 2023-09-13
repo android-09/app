@@ -313,6 +313,13 @@ def updatedetail():
         update_detail(u)
         return redirect("/quizdetailadmin")
 
+@app.route("/deletedetail", methods=["POST"])
+def deletedetail():
+    if request.method == "POST":
+        delete_id = request.form["delete_id"]
+        d = (delete_id,)
+        delete_detail(d)
+        return redirect("/quizdetailadmin")
 
 if __name__ == "__main__":
     app.run(debug=True, port=4000)

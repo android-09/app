@@ -1,10 +1,11 @@
 import pymysql as conn
 import os
+db = conn.connect(host="localhost", user="root", password="appkinak0le", port=3306, database="quiz_play")
 #db = conn.connect(host='localhost', user='root',
 #                  password='Omar@1234', port=3306, database='quiz_play')
 
-db = conn.connect(host='127.0.0.1', user='root',
-                  port=3306, database='quiz_play')
+# db = conn.connect(host='127.0.0.1', user='root',
+#                   port=3306, database='quiz_play')
 cr = db.cursor()
 
 
@@ -181,4 +182,10 @@ def get_alldetail():
 def update_detail(u):
     sql = "UPDATE quiz_detail SET quiz_id=%s,question=%s,selection1=%s,selection2=%s,selection3=%s,selection4=%s,comment=%s,image=%s where id=%s"
     cr.execute(sql, u)
+    db.commit()
+
+# クイズを削除
+def delete_detail(d):
+    sql = "DELETE FROM quiz_detail where id=%s"
+    cr.execute(sql, d)
     db.commit()
