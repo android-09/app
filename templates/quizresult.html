@@ -1,0 +1,37 @@
+{% extends 'base.html' %} {% block content %}
+<main>
+  <div class="breadcrumb">
+    <a href="./">マイページ</a> >
+    <a href="./">{{ title }}</a>
+  </div>
+  <h1 class="quiz__title">{{ title }}</h1>
+
+  <div class="quiz__wrapper">
+    <div class="quiz__result">
+      <div class="result__title">
+        <h1>{{ title }}</h1>
+        <span>受験回数 XX 回</span>
+      </div>
+      <div class="result__score">
+        <p class="result__score--big">{{ result }}%</p>
+        <hr />
+        <p>{{ score }}問正解 / {{ total_questions }}問中</p>
+      </div>
+    </div>
+  </div>
+  <div class="quiz__retry">
+    <button
+      onclick="location.href='{{ url_for('clear_quiz_session', quiz_id=quiz_id) }}'"
+      class="quiz__button"
+    >
+      リトライ
+    </button>
+  </div>
+
+  <div class="backlink">
+    <a href="./">マイページに戻る</a>
+  </div>
+</main>
+<footer></footer>
+
+{% endblock %}

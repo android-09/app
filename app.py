@@ -186,21 +186,9 @@ def sub():
         return redirect("/play")
 
 
-### for frontend
+### quiz top
 
 
-# クイズの個別問題を表示
-@app.route("/quizdetail")
-def quiz():
-    quiz_id = request.args.get("quiz_id")
-    # クイズのタイトルを取得
-    quiz_title = select_quiz_title(quiz_id)
-    # クイズの詳細を取得
-    quiz_detail = select_quiz_detail(quiz_id)
-    return render_template("quizdetail.html", quiz_title=quiz_title, quiz_detail=quiz_detail)
-
-
-# クイズページのトップページ
 @app.route("/quiztop")
 def quiztop():
     user_id = session.get("id")
@@ -211,70 +199,160 @@ def quiztop():
     return render_template("quiztop.html", user_history=user_history, quiz_all=quiz_all)
 
 
+### quiz detail
+
+
+@app.route("/quiz", methods=["GET", "POST"])
+def take_quiz():
+    quiz_id = request.args.get("quiz_id")
+    title = get_quiz_title(quiz_id)
+    data = get_quiz_data(quiz_id)
+    total_questions = len(data)
+
+    if "current_quiz_index" not in session:
+        session["current_quiz_index"] = 0
+
+    if "score" not in session:
+        session["score"] = 0
+
+    current_quiz_index = session["current_quiz_index"]
+    score = session["score"]
+
+    if request.method == "POST":
+        user_answer = request.form["user_answer"]
+        correct_answer = data[current_quiz_index][3]
+
+        print("user:", user_answer)
+        print("answer:", correct_answer)
+
+        if user_answer == correct_answer:
+            session["score"] += 1
+            print("correct")
+        else:
+            print("incorrect")
+
+        session["current_quiz_index"] += 1
+        current_quiz_index = session["current_quiz_index"]
+        score = session["score"]
+
+    if current_quiz_index >= total_questions:
+        if total_questions > 0:
+            result = int((score / total_questions) * 100)
+        else:
+            result = 0
+        return render_template(
+            "quizresult.html",
+            title=title,
+            quiz_id=quiz_id,
+            score=score,
+            result=result,
+            total_questions=total_questions,
+        )
+
+    current_quiz = data[current_quiz_index]
+    qid = current_quiz[0]
+    question = current_quiz[2]
+    options = current_quiz[3:7]
+    shuffled_options = list(options)
+    r.shuffle(shuffled_options)
+
+    print("--------------------")
+    print("current_quiz_index:", current_quiz_index)
+    print("session[current_quiz_index]:", session["current_quiz_index"])
+    print("score:", score)
+    print("--------------------")
+
+    return render_template(
+        "quizdetail.html",
+        title=title,
+        current_quiz=current_quiz,
+        qid=qid,
+        question=question,
+        options=shuffled_options,
+        total_qns=total_questions,
+    )
+
+
+@app.route("/quiz/clear", methods=["GET"])
+def clear_quiz_session():
+    session.pop("current_quiz_index", None)
+    session.pop("score", None)
+    quiz_id = request.args.get("quiz_id")
+    return redirect(url_for("take_quiz", quiz_id=quiz_id))
+
+
 ### quiz title admin
 
+
 def save_file(file):
-    UPLOAD_FOLDER = 'static/images/title/'
+    UPLOAD_FOLDER = "static/images/title/"
     ext = os.path.splitext(file.filename)[1]
     filename = "images/title/" + str(uuid.uuid4()) + ext
-    file_path = os.path.join(UPLOAD_FOLDER, filename.split('/')[-1])
+    file_path = os.path.join(UPLOAD_FOLDER, filename.split("/")[-1])
     file.save(file_path)
     return filename
+
 
 @app.route("/quiztitleadmin")
 def quiztitleadmin():
     titles = select_quiz_all()
-    return render_template('quiztitleadmin.html', titles=titles)
+    return render_template("quiztitleadmin.html", titles=titles)
 
-@app.route("/quiztitleadmin/add", methods=['POST'])
+
+@app.route("/quiztitleadmin/add", methods=["POST"])
 def quiztitleadmin_add():
-    image_file = request.files.get('image_file')
-    if image_file.filename != '':
+    image_file = request.files.get("image_file")
+    if image_file.filename != "":
         image_path = save_file(image_file)
     else:
-        image_path = ''
-    
+        image_path = ""
+
     data = {
-        'title': request.form['title'],
-        'difficulty': request.form['difficulty'],
-        'image': image_path
+        "title": request.form["title"],
+        "difficulty": request.form["difficulty"],
+        "image": image_path,
     }
     add_title(data)
     return redirect("/quiztitleadmin")
 
-@app.route("/quiztitleadmin/edit/<int:id>", methods=['POST'])
+
+@app.route("/quiztitleadmin/edit/<int:id>", methods=["POST"])
 def quiztitleadmin_edit(id):
     data = {
-        'ID': id,
-        'title': request.form['title'],
-        'difficulty': request.form['difficulty']
+        "ID": id,
+        "title": request.form["title"],
+        "difficulty": request.form["difficulty"],
     }
-    
-    image_file = request.files.get('image_file')
-    if image_file and image_file.filename != '':
-        old_image_path = request.form['old_image_path']
+
+    image_file = request.files.get("image_file")
+    if image_file and image_file.filename != "":
+        old_image_path = request.form["old_image_path"]
         if old_image_path and os.path.exists(old_image_path):
             os.remove("/static/" + old_image_path)
 
         image_path = save_file(image_file)
-        data['image'] = image_path
+        data["image"] = image_path
     else:
-        data['image'] = request.form['old_image_path']
-        
+        data["image"] = request.form["old_image_path"]
+
     edit_title(data)
     return redirect("/quiztitleadmin")
+
 
 @app.route("/quiztitleadmin/delete/<int:id>")
 def quiztitleadmin_delete(id):
     delete_title(id)
     return redirect("/quiztitleadmin")
 
+
 # クイズの問題をいれるところ
 @app.route("/quizdetailadmin")
 def quizdetailadmin():
     quiz_all = select_quiz_all()
     select_alldetail = get_alldetail()
-    return render_template("quizdetailadmin.html", quiz_all=quiz_all, select_alldetail=select_alldetail)
+    return render_template(
+        "quizdetailadmin.html", quiz_all=quiz_all, select_alldetail=select_alldetail
+    )
 
 
 @app.route("/adddetailadmin", methods=["POST"])
@@ -288,7 +366,16 @@ def adddetailadmin():
         selection4 = request.form["selection4"]
         comment = request.form["comment"]
         image = request.form["image"]
-        q = (quiz_id, question, selection1, selection2, selection3, selection4, comment, image)
+        q = (
+            quiz_id,
+            question,
+            selection1,
+            selection2,
+            selection3,
+            selection4,
+            comment,
+            image,
+        )
 
         insert_detail(q)
         return redirect(url_for("quizdetailadmin"))
@@ -307,8 +394,16 @@ def updatedetail():
         update_selection4 = request.form["update_selection4"]
         update_comment = request.form["update_comment"]
         update_image = request.form["update_image"]
-        u = (update_quiz_id,update_question,update_selection1,update_selection2,
-            update_selection3,update_selection4,update_comment,update_image,update_id,
+        u = (
+            update_quiz_id,
+            update_question,
+            update_selection1,
+            update_selection2,
+            update_selection3,
+            update_selection4,
+            update_comment,
+            update_image,
+            update_id,
         )
         update_detail(u)
         return redirect("/quizdetailadmin")

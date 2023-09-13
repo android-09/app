@@ -1,11 +1,11 @@
 import pymysql as conn
 import os
-db = conn.connect(host="localhost", user="root", password="appkinak0le", port=3306, database="quiz_play")
-#db = conn.connect(host='localhost', user='root',
+
+# db = conn.connect(host='localhost', user='root',
 #                  password='Omar@1234', port=3306, database='quiz_play')
 
-# db = conn.connect(host='127.0.0.1', user='root',
-#                   port=3306, database='quiz_play')
+db = conn.connect(host="127.0.0.1", user="root", port=3306, database="quiz_play")
+
 cr = db.cursor()
 
 
@@ -100,21 +100,19 @@ def select_quiz_all():
 
 
 # クイズのタイトル（個別）を取得
-def select_quiz_title(quiz_id):
+def get_quiz_title(quiz_id):
     sql = "SELECT * FROM quiz_title WHERE ID=%s"
     cr = db.cursor()
     cr.execute(sql, quiz_id)
-    db.commit()
     ul = cr.fetchall()
-    return ul[0]
+    return ul[0][1]
 
 
 # クイズの詳細を取得
-def select_quiz_detail(quiz_id):
+def get_quiz_data(quiz_id):
     sql = "SELECT * FROM quiz_detail WHERE quiz_id=%s"
     cr = db.cursor()
-    cr.execute(sql, quiz_id)
-    db.commit()
+    cr.execute(sql, (quiz_id,))
     ul = cr.fetchall()
     return ul
 
@@ -129,37 +127,40 @@ def select_user_history(user_id):
     return ul
 
 
-
 def add_title(data):
     with db.cursor() as cursor:
         sql = "INSERT INTO quiz_title (title, difficulty, image) VALUES (%s, %s, %s)"
-        cursor.execute(sql, (data['title'], data['difficulty'], data['image']))
+        cursor.execute(sql, (data["title"], data["difficulty"], data["image"]))
         db.commit()
+
 
 def edit_title(data):
     with db.cursor() as cursor:
         sql = "UPDATE quiz_title SET title=%s, difficulty=%s, image=%s WHERE ID=%s"
-        cursor.execute(sql, (data['title'], data['difficulty'], data['image'], data['ID']))
+        cursor.execute(
+            sql, (data["title"], data["difficulty"], data["image"], data["ID"])
+        )
         db.commit()
+
 
 def delete_title(id):
     with db.cursor() as cursor:
         sql = "SELECT image FROM quiz_title WHERE ID=%s"
         cursor.execute(sql, (id,))
         result = cursor.fetchone()
-        
+
         image_path = None
         if result and result[0]:
-            image_path = os.path.join('static', result[0])
-        
+            image_path = os.path.join("static", result[0])
+
         if image_path and os.path.isfile(image_path):
             os.remove(image_path)
-
 
     with db.cursor() as cursor:
         sql = "DELETE FROM quiz_title WHERE ID=%s"
         cursor.execute(sql, (id,))
         db.commit()
+
 
 # クイズの追加
 def insert_detail(q):

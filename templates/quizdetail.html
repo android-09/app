@@ -1,35 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %} {% block content %}
+<main>
+  <div class="breadcrumb">
+    <a href="./">マイページ</a> >
+    <a href="./">{{ title }}</a>
+  </div>
+  <h1 class="quiz__title">{{ title }}</h1>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <link rel="stylesheet" href="/static/images/style.css" />
-</head>
-
-<body>
-  <!-- ナビゲーション -->
-  {%include "navbar.html"%}
-  <!-- タイトル -->
-  <h1>クイズのタイトル</h1>
-  <p>{{quiz_title[1]}}</p>
-  <!-- 難しさ -->
-  <h2>クイズの難易度</h2>
-  <p>{{quiz_title[2]}}</p>
-  <!-- 実際の問題 -->
-  {% for quiz in quiz_detail %}
-    <div>
-      <h2>問題: {{quiz[2]}}</h2>
-      <ul>
-        <li>選択肢1:{{quiz[3]}}</li>
-        <li>選択肢2:{{quiz[4]}}</li>
-        <li>選択肢3:{{quiz[5]}}</li>
-      </ul>
+  <div class="quiz__wrapper">
+    <div class="quiz__question">
+      <span class="quiz__question--number">Q{{ qid }}</span>
+      <p class="quiz__question--text">{{ question }}</p>
+      <p class="quiz__question--order">{{ qid }} / {{ total_qns }}</p>
     </div>
-  {% endfor %}
 
+    <form method="POST" id="quiz-form" class="quiz__answer">
+      <div class="quiz__answer--input">
+        {% for option in options %}
+        <input
+          type="radio"
+          name="user_answer"
+          value="{{ option }}"
+          id="opt_{{ loop.index }}"
+        />
+        <label
+          for="opt_{{ loop.index }}"
+          class="{% if option == answer %}correct{% endif %}"
+          >{{ option }}</label
+        >
+        {% endfor %}
+      </div>
+      <div class="quiz__submit">
+        <button type="submit" id="submit-button" class="quiz__button">
+          回答する
+        </button>
+      </div>
+    </form>
 
-</body>
+    <div class="quiz__feedback">
+      <div id="correct-feedback"></div>
+      <div id="incorrect-feedback"></div>
+    </div>
+  </div>
 
-</html>
+  <div class="backlink">
+    <a href="./">マイページに戻る</a>
+  </div>
+</main>
+
+<script>
+  const quizData = JSON.parse('{{ current_quiz|tojson|safe }}');
+</script>
+<script src="/static/js/quiz.js"></script>
+
+{% endblock %}
