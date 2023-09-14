@@ -8,9 +8,9 @@
 
   <div class="quiz__wrapper">
     <div class="quiz__question">
-      <span class="quiz__question--number">Q{{ qid }}</span>
+      <span class="quiz__question--number">Q{{ question_no }}</span>
       <p class="quiz__question--text">{{ question }}</p>
-      <p class="quiz__question--order">{{ qid }} / {{ total_qns }}</p>
+      <p class="quiz__question--order">{{ question_no }} / {{ total_qns }}</p>
     </div>
 
     <form method="POST" id="quiz-form" class="quiz__answer">

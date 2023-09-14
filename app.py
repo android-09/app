@@ -250,7 +250,6 @@ def take_quiz():
         )
 
     current_quiz = data[current_quiz_index]
-    qid = current_quiz[0]
     question = current_quiz[2]
     options = current_quiz[3:7]
     shuffled_options = list(options)
@@ -266,7 +265,7 @@ def take_quiz():
         "quizdetail.html",
         title=title,
         current_quiz=current_quiz,
-        qid=qid,
+        question_no=current_quiz_index + 1,
         question=question,
         options=shuffled_options,
         total_qns=total_questions,
@@ -408,6 +407,7 @@ def updatedetail():
         update_detail(u)
         return redirect("/quizdetailadmin")
 
+
 @app.route("/deletedetail", methods=["POST"])
 def deletedetail():
     if request.method == "POST":
@@ -415,6 +415,7 @@ def deletedetail():
         d = (delete_id,)
         delete_detail(d)
         return redirect("/quizdetailadmin")
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=4000)
