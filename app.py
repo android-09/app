@@ -11,7 +11,7 @@ app.secret_key = "arfa"
 @app.route("/")
 def home():
     if session.get("id"):
-        return redirect("/userpage")
+        return redirect("/quiztop")
 
     else:
         return render_template("home.html")

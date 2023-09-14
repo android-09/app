@@ -8,16 +8,16 @@
         width="50%"
     /></a>
     <ul class="nav">
-      <li id="nav__my-page"><a href="./userpage">マイページ</a></li>
-      <li id="nav__settings"><a href="">個人設定</a></li>
+      <li id="nav__my-page"><a href="./quiztop">My Page</a></li>
+      <li id="nav__settings"><a href="./profile">Settings</a></li>
       <li id="nav__profile">
         <a href=""
           >{% if session.id %} {{ session.uname.upper() }} {% endif %}</a
         >
         <ul class="nav__dropdown">
-          <li class="dropdown__item"><a href="">ゲストログイン</a></li>
-          <li class="dropdown__item"><a href="">個人設定</a></li>
-          <li class="dropdown__item"><a href="./logout">サインアウト</a></li>
+          <!-- <li class="dropdown__item"><a href="">ゲストログイン</a></li>
+          <li class="dropdown__item"><a href="">個人設定</a></li> -->
+          <li class="dropdown__item"><a href="./logout">Logout</a></li>
         </ul>
       </li>
     </ul>
