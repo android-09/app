@@ -4,10 +4,11 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-	<link rel="stylesheet" href="/static/images/style_detail.css" />
+	<link rel="stylesheet" href="/static/css/style_detail.css" />
 </head>
 <body>
-	{%include "navbar.html"%}
+	<!-- {%include "navbar.html"%} -->
+	{% extends 'base.html' %}{% block content %}
 	<div class="box"></div>
 	<h2 class="heading-031">クイズ一覧</h2>
 	<br>
@@ -108,6 +109,7 @@
 		</form>
 	</div>
 	<div class="box"></div>
+	{% endblock %}
 	<script>
 		document.querySelectorAll('.edit-button').forEach(button => {
 			button.addEventListener('click', (event) => {
