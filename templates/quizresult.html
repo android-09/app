@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 <main>
   <div class="breadcrumb">
-    <a href="./">マイページ</a> >
+    <a href="./quiztop">マイページ</a> >
     <a href="./">{{ title }}</a>
   </div>
   <h1 class="quiz__title">{{ title }}</h1>
@@ -10,12 +10,19 @@
     <div class="quiz__result">
       <div class="result__title">
         <h1>{{ title }}</h1>
-        <span>受験回数 XX 回</span>
+        <span>受験回数 {{ total_attempts }} 回</span>
       </div>
       <div class="result__score">
         <p class="result__score--big">{{ result }}%</p>
         <hr />
         <p>{{ score }}問正解 / {{ total_questions }}問中</p>
+      </div>
+      <div class="quiz__scoresheet">
+        {% for x in range(0, total_questions) %}
+        <div class="scoresheet__single">
+          <div class="scoresheet__single--number">{{loop.index}}</div>
+        </div>
+        {% endfor %}
       </div>
     </div>
   </div>
@@ -29,7 +36,7 @@
   </div>
 
   <div class="backlink">
-    <a href="./">マイページに戻る</a>
+    <a href="./quiztop">マイページに戻る</a>
   </div>
 </main>
 <footer></footer>
