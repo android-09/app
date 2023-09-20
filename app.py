@@ -204,6 +204,10 @@ def quiztop():
 
 @app.route("/quiz", methods=["GET", "POST"])
 def take_quiz():
+    user_id = session.get("id")
+    user_history = select_user_history(user_id)
+    total_attempts = len(user_history)
+
     quiz_id = request.args.get("quiz_id")
     title = get_quiz_title(quiz_id)
     data = get_quiz_data(quiz_id)
@@ -247,6 +251,7 @@ def take_quiz():
             score=score,
             result=result,
             total_questions=total_questions,
+            total_attempts=total_attempts,
         )
 
     current_quiz = data[current_quiz_index]
