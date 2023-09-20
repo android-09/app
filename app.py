@@ -196,7 +196,7 @@ def quiztop():
     user_history = select_user_history(user_id)
     # すべてのクイズを取得
     quiz_all = select_quiz_all()
-    return render_template("quiztop.html", user_history=user_history, quiz_all=quiz_all)
+    return render_template("quiztop2.html", user_history=user_history, quiz_all=quiz_all)
 
 
 ### quiz detail
