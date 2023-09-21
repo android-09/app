@@ -2,68 +2,186 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <link rel="stylesheet" href="/static/images/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ログインページ</title>
+    <style>
+       * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 0;
+        }
+
+        .login-container {
+            background: linear-gradient(to bottom, #414143 20%, #fff 10%);
+            padding: 20px;
+            border-radius: 2%;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 40%;
+            position: relative;
+        }
+
+        .service-name {
+            color: #fff;
+            padding: 10px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .validation {
+            background-color: rgb(255, 212, 204);
+            color: #D73332;
+            width: 100%;
+            height: 50px;
+            z-index: 1;
+            position: absolute;
+            left: 0;
+            display: none;
+        }
+
+        .input-container_mail {
+            margin-top: 10px;
+        }
+
+        .input-container_mail label {
+            display: block;
+            font-weight: bold;
+        }
+
+        .input-container_mail input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 3px;
+        }
+
+        .input-container_pass label {
+            display: block;
+            font-weight: bold;
+        }
+
+        .input-container_pass input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 3px;
+        }
+
+        .login-button {
+            background-color: #3B4556;
+            color: #fff;
+            padding: 15px 50px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .register-link_adress {
+            color: gray;
+        }
+
+        .login-button:hover {
+            background-color: #91a9d3;
+        }
+
+        .register-link {
+            margin-top: 20px;
+            margin-bottom: 50px;
+            font-size: 14px;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f0f0f0;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+        }
+
+        .footer a {
+            color: #888;
+            margin: 0 10px;
+        }
+
+        input.mail {
+            background-image: url(../static/images/user.svg);
+            background-repeat: no-repeat;
+            background-size: 30px;
+            background-position: 20px;
+            background-color: #E5E5E5;
+            border: none;
+            border-radius: 0%;
+            height: 60px;
+            width: 60%;
+            padding-left: 60px;
+        }
+
+        input.pass {
+            background-image: url(../static/images/rock.svg);
+            background-repeat: no-repeat;
+            background-size: 30px;
+            background-position: 20px;
+            background-color: #E5E5E5;
+            border: none;
+            border-radius: 0%;
+            margin-bottom: 30px;
+            height: 60px;
+            width: 60%;
+            padding-left: 60px;
+        }
+
+        input::placeholder {
+            padding-left: 10px;
+        }
+
+        ::placeholder {
+            color: #A3A3A3;
+        }
+
+    </style>
+    
+    
 </head>
 
 <body>
-  <!DOCTYPE html>
-  <html lang="en">
-
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="/static/style.css" />
-  </head>
-
-  <body>
-    {%include "navbar.html"%}
-    <main>
-      <div id="mainDiv">
-        <div class="imgDiv">
-          <img src="/static/images/quiz.png" alt="" />
+    <div class="login-container">
+        <div class="service-name">クスール検定</div>
+        <div class="validation" id="validation-message">
+            <p class="validation_text">メールアドレスまたはパスワードが違います。</p>
         </div>
-        <div class="infoDiv">
-          <form method="POST" action="playuser">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>
-                    <p>Log-In</p>
-                  </th>
-                </tr>
-              </thead>
-
-              <tr>
-                <td>
-                  <input placeholder="Name" type="text" name="name" id="" />
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <input placeholder="Password" type="password" name="password" id="" />
-                </td>
-              </tr>
-              <tr>
-                <td><input type="submit"></td>
-              </tr>
-            </table>
-          </form>
+        <br><br><br>
+        <form method="POST" action="playuser">
+            <div class="input-container_mail">
+                <input type="text" id="" name="name" placeholder="名前" class="mail">
+            </div>
+            <div class="input-container_pass">
+                <input type="password" id="password" name="password" placeholder="パスワード" class="pass">
+            </div>
+            <button class="login-button">ログイン</button>
+        </form>
+        <div class="register-link">
+            <a href="/" class="register-link_adress"> アカウントをお持ちでない方</a>
         </div>
-      </div>
-    </main>
-    <footer>
-      <div>
-        <p>copyright</p>
-      </div>
-    </footer>
-  </body>
-
-  </html>
+    </div>
+    <div class="footer">
+        <a href="#">個人情報保護について</a> | <a href="#">利用規約</a> | <a href="#">お問い合わせ</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &copy; Cschool All Rights Reserved
+    </div>
 </body>
 
 </html>
