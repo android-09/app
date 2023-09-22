@@ -9,12 +9,17 @@ app.secret_key = "arfa"
 
 
 @app.route("/")
-def home():
+def top():
     if session.get("id"):
         return redirect("/quiztop")
 
     else:
-        return render_template("home.html")
+        return redirect("/home")
+    
+@app.route("/home")
+def home() :
+    return render_template("home.html")
+
 
 
 @app.route("/adduser", methods=["POST"])
