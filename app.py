@@ -426,6 +426,16 @@ def deletedetail():
         delete_detail(d)
         return redirect("/quizdetailadmin")
 
+@app.route("/privacypolicy", methods=["POST","GET"])
+def plivacypolicy():
+    return render_template("privacypolicy.html")
+
+@app.route("/aboutus", methods=["POST","GET"])
+def aboutus():
+    return render_template("aboutus.html")
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=4000)

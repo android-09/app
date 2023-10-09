@@ -397,6 +397,10 @@ main {
 	padding: 0 2.08%;
 }
 
+.challengedQuiz table {
+	width: 100%;
+}
+
 .challengedQuiz__list {
 	background-color: #E5E5E5;
 	border-bottom: solid 1px gray;
@@ -457,6 +461,7 @@ main {
 
 /* 受けた検定の詳細部分 */
 .challengedQuiz__moreView {
+	font-size: 14px;
 	border-bottom: solid 1px gray;
 	background-color: #fff;
 }
