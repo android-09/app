@@ -402,17 +402,31 @@ main {
 	border-bottom: solid 1px gray;
 }
 
-.category__list li,
+.challengedQuiz__list td {
+	padding: 10px;
+}
+
+/* Date */
+.challengedQuiz__list .challengedQuiz__list--one {
+	width: 20%;
+}
+
+/* Score */
+.challengedQuiz__list .challengedQuiz__list--three {
+	width: 15%;
+}
+
+/* .category__list li,
 .challengedQuiz__list li {
 	background-color: #E5E5E5;
 	padding: 20px 4%;
-}
+} */
 
-.challengedQuiz__list li {
+/* .challengedQuiz__list li {
 	padding: 20px 25px;
-}
+} */
 
-.category__list--one {
+/* .category__list--one {
 	margin-bottom: 20px;
 }
 
@@ -425,20 +439,16 @@ main {
 	content: "";
 	display: inline-block;
 	width: 20px;
-	/*画像の幅*/
 	height: 20px;
-	/*画像の高さ*/
 	translate: -1px -1px;
 	background-image: url(../img/right_line\ \(2\).png);
 	background-size: contain;
 	vertical-align: middle;
-}
+} */
 
 .challengedQuiz__list--two {
 	padding-right: 150px;
 }
-
-
 
 .category__list__item {
 	width: 250px;
@@ -448,15 +458,15 @@ main {
 /* 受けた検定の詳細部分 */
 .challengedQuiz__moreView {
 	border-bottom: solid 1px gray;
+	background-color: #fff;
+}
+
+.challengedQuiz__moreView td {
+	padding: 10px;
 }
 
 .challengedQuiz__moreView__list--four {
 	padding-left: 45px;
-}
-
-.challengedQuiz__moreView ul,
-.challengedQuiz__moreView li {
-	background-color: #fff;
 }
 
 /* 全ての検定 */
@@ -494,10 +504,11 @@ main {
 
 .moreInfo {
 	/* margin-left: 300px; */
-	/* margin-top: 20px; */
-	position: absolute;
+	width: 70%;
+	margin: 30px auto 20px;
+	/* position: absolute;
 	right: 14px;
-	bottom: 14px;
+	bottom: 14px; */
 }
 
 .moreInfo .moreInfo_text {

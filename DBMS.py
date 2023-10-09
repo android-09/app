@@ -119,7 +119,9 @@ def get_quiz_data(quiz_id):
 
 # userの履歴を取得
 def select_user_history(user_id):
-    sql = "SELECT * FROM user_history WHERE user_id=%s"
+    sql = "SELECT * FROM user_history INNER JOIN quiz_title ON user_history.quiz_category = quiz_title.ID WHERE user_id=%s"
+    # sql = "SELECT * FROM user_history LEFT JOIN quiz_title ON user_history.quiz_category = quiz_title.title WHERE user_id=%s"
+    # sql = "SELECT * FROM user_history WHERE user_id=%s"
     cr = db.cursor()
     cr.execute(sql, user_id)
     db.commit()

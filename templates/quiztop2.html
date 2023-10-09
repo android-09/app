@@ -48,22 +48,13 @@
         </a>
     </ul> -->
 
-    <div class="challengedQuiz">
+    <!-- <div class="challengedQuiz">
         <h2>Quizzes you have tried</h2>
         <ul class="challengedQuiz__list">
-            <a href="#">
-                <li class="challengedQuiz__list--one">Date & Time</li>
-            </a>
-            <a href="#" class="challengedQuiz__list--two">
-                <li class="challengedQuiz__list--two">Title</li>
-            </a>
-            <a href="#">
-                <li class="challengedQuiz__list--three">Number of times</li>
-            </a>
-            <a href="#">
-                <li class="challengedQuiz__list--four">Rate</li>
-            </a>
-
+            <li class="challengedQuiz__list--one">Date</li>
+            <li class="challengedQuiz__list--two">Title</li>
+            <li class="challengedQuiz__list--three">Number of times</li>
+            <li class="challengedQuiz__list--four">Rate</li>
         </ul>
     </div>
     <div class="challengedQuiz__moreView">
@@ -83,7 +74,29 @@
             </a>
         </ul>
         {% endfor %}
+    </div> -->
+    <div class="challengedQuiz">
+        <h2>Quizzes you have tried</h2>
+        <table>
+            <tr class="challengedQuiz__list">
+                <td class="challengedQuiz__list--one">Date</td>
+                <td class="challengedQuiz__list--two">Title</td>
+                <td class="challengedQuiz__list--three">Score</td>
+            </tr>
+            {% for history in user_history %}
+            <tr class="challengedQuiz__moreView">
+                <td class="challengedQuiz__list--one">
+                    {% set formatted_date = history[4].strftime("%Y-%m-%d") %}
+                    {{formatted_date}}
+                </td>
+                <td class="challengedQuiz__list--two">{{history[6]}}</td>
+                <td class="challengedQuiz__list--three">{{history[3]}} / 10</td>
+            </tr>
+            {% endfor %}
+        </table>
     </div>
+
+
     <h2>All Quizzes</h2>
     <div class="allQuiz flex">
         {% for quiz in quiz_all %}
@@ -93,9 +106,9 @@
                 <p class="Ninzyahattori__title__text allQuiz__title__text">{{quiz[1]}}</p>
             </div>
             <hr>
-            <p class="Ninzyahattori__text allQuiz__text">Ninja Hattori-kun," a very popular national animation in India. 
+            <!-- <p class="Ninzyahattori__text allQuiz__text">Ninja Hattori-kun," a very popular national animation in India. 
                 The questions include basic questions such as the names and ages of the characters in Ninja Hattori-kun.
-            </p>
+            </p> -->
             <div class="moreInfo">
                 <a class="moreInfo_text" href="/quiz?quiz_id={{quiz[0]}}">PLAY QUIZ</a>
             </div>
