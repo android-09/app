@@ -4,11 +4,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ログインページ</title>
     <style>
+        main {
+            font-family: Arial, sans-serif;
+            /* background-color: #f0f0f0; */
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+            padding: 0;
+        }
+        .login-button {
+            padding: 15px 50px;
+        }
        * {
             box-sizing: border-box;
         }
 
-        body {
+        /* main {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
             margin: 0;
@@ -17,7 +30,7 @@
             justify-content: center;
             min-height: 100vh;
             padding: 0;
-        }
+        } */
 
         .login-container {
             background: linear-gradient(to bottom, #414143 20%, #fff 10%);
@@ -26,7 +39,6 @@
             text-align: center;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 40%;
-            position: relative;
         }
 
         .service-name {
@@ -34,7 +46,6 @@
             padding: 10px;
             font-size: 24px;
             font-weight: bold;
-            /* margin-bottom: 10px; */
         }
 
         .validation {
@@ -53,14 +64,13 @@
         }
 
         .input-container_name input {
-            width: 100%;
+            width: 70%;
             padding: 10px;
             margin: 5px 0;
             border-radius: 3px;
         }
 
         .input-container_mail {
-            /* margin-top: 10px; */
         }
 
         .input-container_mail label {
@@ -69,7 +79,7 @@
         }
 
         .input-container_mail input {
-            width: 100%;
+            width: 70%;
             padding: 10px;
             margin: 5px 0;
             border-radius: 3px;
@@ -81,7 +91,7 @@
         }
 
         .input-container_pass input {
-            width: 100%;
+            width: 70%;
             padding: 10px;
             margin: 5px 0;
             border-radius: 3px;
@@ -91,6 +101,7 @@
             background-color: #3B4556;
             color: #fff;
             padding: 15px 50px;
+            
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -168,30 +179,35 @@
     
 </head>
 
-<body>
-    <!-- {%include "navbar.html"%} -->
-    <div class="login-container">
-        <div class="service-name">Edit Details</div>
-        <br>
-        <form method="POST" action="playuser">
-            <div class="input-container_name">
-                <input placeholder="Name" type="text" name="name" id="" value="{{session.uname}}" />
-            </div>
-            <div class="input-container_mail">
-                <input placeholder="Email" type="text" name="email" id="" value="{{session.email}}" />
-            </div>
-            <div class="input-container_pass">
-                <input
-                placeholder="Password"
-                type="password"
-                name="password"
-                id=""
-                value="{{session.password}}"
-              />
-            </div>
-            <button class="login-button">Submit</button>
-        </form>
-    </div>
-</body>
 
-</html>
+
+<body>
+    {% extends 'base.html' %}{% block content %}
+    <main>
+        <div class="login-container">
+            <div class="service-name">Edit Details</div>
+            <br>
+            <form method="POST" action="playuser">
+                <div class="input-container_name">
+                    <input placeholder="Name" type="text" name="name" id="" value="{{session.uname}}" />
+                </div>
+                <div class="input-container_mail">
+                    <input placeholder="Email" type="text" name="email" id="" value="{{session.email}}" />
+                </div>
+                <div class="input-container_pass">
+                    <input
+                    placeholder="Password"
+                    type="password"
+                    name="password"
+                    id=""
+                    value="{{session.password}}"
+                />
+                </div>
+                <button class="login-button">Submit</button>
+            </form>
+        </div>
+    </main>
+    {% endblock %}
+<!-- </body>
+
+</html> -->
