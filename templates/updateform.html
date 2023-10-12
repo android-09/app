@@ -1,9 +1,17 @@
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ログインページ</title>
     <style>
+
+        .login-button {
+            padding: 15px 50px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         main {
             font-family: Arial, sans-serif;
             /* background-color: #f0f0f0; */
@@ -14,23 +22,6 @@
             min-height: 70vh;
             padding: 0;
         }
-        .login-button {
-            padding: 15px 50px;
-        }
-       * {
-            box-sizing: border-box;
-        }
-
-        /* main {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 0;
-        } */
 
         .login-container {
             background: linear-gradient(to bottom, #414143 20%, #fff 10%);
@@ -58,6 +49,7 @@
             left: 0;
             display: none;
         }
+
         .input-container_name label {
             display: block;
             font-weight: bold;
@@ -65,13 +57,12 @@
 
         .input-container_name input {
             width: 70%;
-            padding: 10px;
+            padding: 15px;
             margin: 5px 0;
             border-radius: 3px;
         }
 
-        .input-container_mail {
-        }
+        .input-container_mail {}
 
         .input-container_mail label {
             display: block;
@@ -80,7 +71,7 @@
 
         .input-container_mail input {
             width: 70%;
-            padding: 10px;
+            padding: 15px;
             margin: 5px 0;
             border-radius: 3px;
         }
@@ -92,16 +83,17 @@
 
         .input-container_pass input {
             width: 70%;
-            padding: 10px;
+            padding: 15px;
             margin: 5px 0;
             border-radius: 3px;
+            margin-bottom: 10px;
         }
 
         .login-button {
             background-color: #3B4556;
             color: #fff;
             padding: 15px 50px;
-            
+
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -173,10 +165,9 @@
         ::placeholder {
             color: #A3A3A3;
         }
-
     </style>
-    
-    
+
+
 </head>
 
 
@@ -195,19 +186,13 @@
                     <input placeholder="Email" type="text" name="email" id="" value="{{session.email}}" />
                 </div>
                 <div class="input-container_pass">
-                    <input
-                    placeholder="Password"
-                    type="password"
-                    name="password"
-                    id=""
-                    value="{{session.password}}"
-                />
+                    <input placeholder="Password" type="password" name="password" id="" value="{{session.password}}" />
                 </div>
                 <button class="login-button">Submit</button>
             </form>
         </div>
     </main>
     {% endblock %}
-<!-- </body>
+</body>
 
-</html> -->
+</html>
