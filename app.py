@@ -15,11 +15,11 @@ def top():
 
     else:
         return redirect("/home")
-    
-@app.route("/home")
-def home() :
-    return render_template("home.html")
 
+
+@app.route("/home")
+def home():
+    return render_template("home.html")
 
 
 @app.route("/adduser", methods=["POST"])
@@ -201,7 +201,9 @@ def quiztop():
     user_history = select_user_history(user_id)
     # すべてのクイズを取得
     quiz_all = select_quiz_all()
-    return render_template("quiztop2.html", user_history=user_history, quiz_all=quiz_all)
+    return render_template(
+        "quiztop2.html", user_history=user_history, quiz_all=quiz_all
+    )
 
 
 ### quiz detail
@@ -224,8 +226,12 @@ def take_quiz():
     if "score" not in session:
         session["score"] = 0
 
+    if "scoresheet" not in session:
+        session["scoresheet"] = []
+
     current_quiz_index = session["current_quiz_index"]
     score = session["score"]
+    scoresheet = session["scoresheet"]
 
     if request.method == "POST":
         user_answer = request.form["user_answer"]
@@ -235,14 +241,17 @@ def take_quiz():
         print("answer:", correct_answer)
 
         if user_answer == correct_answer:
-            session["score"] += 1
             print("correct")
+            session["score"] += 1
+            session["scoresheet"].append("1")
         else:
             print("incorrect")
+            session["scoresheet"].append("0")
 
         session["current_quiz_index"] += 1
         current_quiz_index = session["current_quiz_index"]
         score = session["score"]
+        scoresheet = session["scoresheet"]
 
     if current_quiz_index >= total_questions:
         if total_questions > 0:
@@ -257,6 +266,7 @@ def take_quiz():
             result=result,
             total_questions=total_questions,
             total_attempts=total_attempts,
+            scoresheet=scoresheet,
         )
 
     current_quiz = data[current_quiz_index]
@@ -286,6 +296,7 @@ def take_quiz():
 def clear_quiz_session():
     session.pop("current_quiz_index", None)
     session.pop("score", None)
+    session.pop("scoresheet", None)
     quiz_id = request.args.get("quiz_id")
     return redirect(url_for("take_quiz", quiz_id=quiz_id))
 
@@ -426,15 +437,15 @@ def deletedetail():
         delete_detail(d)
         return redirect("/quizdetailadmin")
 
-@app.route("/privacypolicy", methods=["POST","GET"])
+
+@app.route("/privacypolicy", methods=["POST", "GET"])
 def plivacypolicy():
     return render_template("privacypolicy.html")
 
-@app.route("/aboutus", methods=["POST","GET"])
+
+@app.route("/aboutus", methods=["POST", "GET"])
 def aboutus():
     return render_template("aboutus.html")
-
-
 
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 <main>
   <div class="breadcrumb">
-    <a href="./quiztop">マイページ</a> >
+    <a href="./quiztop">My Page</a> >
     <a href="./">{{ title }}</a>
   </div>
   <h1 class="quiz__title">{{ title }}</h1>
@@ -31,7 +31,7 @@
       </div>
       <div class="quiz__submit">
         <button type="submit" id="submit-button" class="quiz__button">
-          回答する
+          Submit
         </button>
       </div>
     </form>
@@ -43,12 +43,12 @@
   </div>
 
   <div class="backlink">
-    <a href="./quiztop">マイページに戻る</a>
+    <a href="./quiztop">Back to My Page</a>
   </div>
 </main>
 
 <script>
-  const quizData = JSON.parse('{{ current_quiz|tojson|safe }}');
+  const quizData = {{ current_quiz|tojson|safe }};
 </script>
 <script src="/static/js/quiz.js"></script>
 

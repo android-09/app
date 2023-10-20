@@ -1,6 +1,6 @@
-let submitButton = document.getElementById('submit-button');
+let submitButton = document.getElementById("submit-button");
 
-submitButton.addEventListener('click', function (event) {
+submitButton.addEventListener("click", function (event) {
   event.preventDefault();
 
   let userAnswer = document.querySelector(
@@ -8,18 +8,18 @@ submitButton.addEventListener('click', function (event) {
   ).value;
   let correctAnswer = quizData[3];
 
-  let correctFeedback = document.getElementById('correct-feedback');
-  let incorrectFeedback = document.getElementById('incorrect-feedback');
+  let correctFeedback = document.getElementById("correct-feedback");
+  let incorrectFeedback = document.getElementById("incorrect-feedback");
 
   if (userAnswer === correctAnswer) {
-    correctFeedback.style.display = 'block';
-    incorrectFeedback.style.display = 'none';
+    correctFeedback.style.display = "block";
+    incorrectFeedback.style.display = "none";
   } else {
-    incorrectFeedback.style.display = 'block';
-    correctFeedback.style.display = 'none';
+    incorrectFeedback.style.display = "block";
+    correctFeedback.style.display = "none";
   }
 
   setTimeout(function () {
-    document.querySelector('form').submit();
+    document.querySelector("form").submit();
   }, 1200);
 });

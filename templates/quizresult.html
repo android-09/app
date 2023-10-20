@@ -21,6 +21,15 @@
         {% for x in range(0, total_questions) %}
         <div class="scoresheet__single">
           <div class="scoresheet__single--number">{{loop.index}}</div>
+          {% if scoresheet[x] == "1" %}
+          <img src="../static/images/correct.png" width="30px" height="30px" />
+          {% elif scoresheet[x] == "0" %}
+          <img
+            src="../static/images/incorrect.png"
+            width="30px"
+            height="30px"
+          />
+          {% endif %}
         </div>
         {% endfor %}
       </div>
