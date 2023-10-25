@@ -1,6 +1,7 @@
 import os
 import uuid
 import random as r
+import datetime
 from flask import *
 from DBMS import *
 
@@ -258,6 +259,15 @@ def take_quiz():
             result = int((score / total_questions) * 100)
         else:
             result = 0
+
+        data = {
+            "user_id": user_id,
+            "quiz_category": quiz_id,
+            "correct_amount": result,
+            "date": datetime.date.today().strftime("%Y-%m-%d"),
+        }
+        add_user_history(data)
+
         return render_template(
             "quizresult.html",
             title=title,

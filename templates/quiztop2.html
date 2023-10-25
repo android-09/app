@@ -1,9 +1,9 @@
 {% extends 'base.html' %} {% block content %}
 <head>
-    <link rel="stylesheet" href="/static/css/quiztop2.css">
+  <link rel="stylesheet" href="/static/css/quiztop2.css" />
 </head>
 <main>
-    <!-- <h2>カテゴリー</h2>
+  <!-- <h2>カテゴリー</h2>
     <ul class="category__list category__list--one pc__only">
         <a href="./Quiz.html">
             <li class="category__list__item category__list--one">忍者ハットリくん</li>
@@ -48,7 +48,7 @@
         </a>
     </ul> -->
 
-    <!-- <div class="challengedQuiz">
+  <!-- <div class="challengedQuiz">
         <h2>Quizzes you have tried</h2>
         <ul class="challengedQuiz__list">
             <li class="challengedQuiz__list--one">Date</li>
@@ -75,46 +75,47 @@
         </ul>
         {% endfor %}
     </div> -->
-    <div class="challengedQuiz">
-        <h2>Quizzes you have tried</h2>
-        <table>
-            <tr class="challengedQuiz__list">
-                <td class="challengedQuiz__list--one">Date</td>
-                <td class="challengedQuiz__list--two">Title</td>
-                <td class="challengedQuiz__list--three">Score</td>
-            </tr>
-            {% for history in user_history %}
-            <tr class="challengedQuiz__moreView">
-                <td class="challengedQuiz__list--one">
-                    {% set formatted_date = history[4].strftime("%Y-%m-%d") %}
-                    {{formatted_date}}
-                </td>
-                <td class="challengedQuiz__list--two">{{history[6]}}</td>
-                <td class="challengedQuiz__list--three">{{history[3]}} / 10</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
+  <div class="challengedQuiz">
+    <h2>Quizzes you have tried</h2>
+    <table>
+      <tr class="challengedQuiz__list">
+        <td class="challengedQuiz__list--one">Date</td>
+        <td class="challengedQuiz__list--two">Title</td>
+        <td class="challengedQuiz__list--three">Score</td>
+      </tr>
+      {% for history in user_history %}
+      <tr class="challengedQuiz__moreView">
+        <td class="challengedQuiz__list--one">
+          {% set formatted_date = history[4].strftime("%Y-%m-%d")%}
+          {{formatted_date}}
+        </td>
+        <td class="challengedQuiz__list--two">{{history[6]}}</td>
+        <td class="challengedQuiz__list--three">{{history[3]}} %</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
 
-
-    <h2>All Quizzes</h2>
-    <div class="allQuiz flex">
-        {% for quiz in quiz_all %}
-        <div class="allQuiz__container">
-            <div class="flex">
-                <img src="static/{{quiz[3]}}" alt="{{quiz[1]}}">
-                <p class="Ninzyahattori__title__text allQuiz__title__text">{{quiz[1]}}</p>
-            </div>
-            <hr>
-            <!-- <p class="Ninzyahattori__text allQuiz__text">Ninja Hattori-kun," a very popular national animation in India. 
+  <h2>All Quizzes</h2>
+  <div class="allQuiz flex">
+    {% for quiz in quiz_all %}
+    <div class="allQuiz__container">
+      <div class="flex">
+        <img src="static/{{quiz[3]}}" alt="{{quiz[1]}}" />
+        <p class="Ninzyahattori__title__text allQuiz__title__text">
+          {{quiz[1]}}
+        </p>
+      </div>
+      <hr />
+      <!-- <p class="Ninzyahattori__text allQuiz__text">Ninja Hattori-kun," a very popular national animation in India. 
                 The questions include basic questions such as the names and ages of the characters in Ninja Hattori-kun.
             </p> -->
-            <div class="moreInfo">
-                <a class="moreInfo_text" href="/quiz?quiz_id={{quiz[0]}}">PLAY QUIZ</a>
-            </div>
-        </div>
-        {% endfor %}
-        <!-- <div class="allQuiz__container">
+      <div class="moreInfo">
+        <a class="moreInfo_text" href="/quiz?quiz_id={{quiz[0]}}">PLAY QUIZ</a>
+      </div>
+    </div>
+    {% endfor %}
+    <!-- <div class="allQuiz__container">
             <div class="flex">
                 <img src="./img/allPloblem__Kureyonsintyan.png" alt="クレヨンしんちゃん">
                 <p class="allQuiz__title__text">クレヨンしんちゃん【基礎】</p>
@@ -184,12 +185,7 @@
                 <a class="moreInfo_text" href="#">MORE INFO</a>
             </div>
         </div> -->
-    </div>
+  </div>
 </main>
-
-
-
-
-
 
 {% endblock %}

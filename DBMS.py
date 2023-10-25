@@ -129,6 +129,21 @@ def select_user_history(user_id):
     return ul
 
 
+def add_user_history(data):
+    with db.cursor() as cursor:
+        sql = "INSERT INTO user_history (user_id, quiz_category, correct_amount, date) VALUES (%s, %s, %s, %s)"
+        cursor.execute(
+            sql,
+            (
+                data["user_id"],
+                data["quiz_category"],
+                data["correct_amount"],
+                data["date"],
+            ),
+        )
+        db.commit()
+
+
 def add_title(data):
     with db.cursor() as cursor:
         sql = "INSERT INTO quiz_title (title, difficulty, image) VALUES (%s, %s, %s)"
@@ -186,6 +201,7 @@ def update_detail(u):
     sql = "UPDATE quiz_detail SET quiz_id=%s,question=%s,selection1=%s,selection2=%s,selection3=%s,selection4=%s,comment=%s,image=%s where id=%s"
     cr.execute(sql, u)
     db.commit()
+
 
 # クイズを削除
 def delete_detail(d):
