@@ -1,20 +1,258 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us</title>
-    <!-- <link rel="stylesheet" href="/static/css/aboutus.css"> -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>About Us</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<!-- <link rel="stylesheet" href="./style.css"> -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
 </head>
+<style>
+	* {
+		font-family: 'Zen Maru Gothic', serif;
+	}
+
+	@media (max-width: 1024px) {
+		.playButton{
+		top: 20%;
+	}
+	}
+
+	@media (max-width: 640px) {
+		.logo__big {
+			width: 70%;
+
+		}
+
+		.firstview__text {
+			top: 14%;
+		}
+	}
+    body{
+        background-color: #F1F1F4;
+    }
+
+
+	.firstview__text {
+		position: absolute;
+		top: 15.5%;
+		left: 50%;
+		transform: translateX(-50%);
+		-webkit-transform: translateX(-50%);
+		-ms-transform: translateX(-50%);
+	}
+
+
+	.playButton::after {
+		content: '';
+		display: inline-block;
+		width: 15px;
+		height: 15px;
+		transform: translate(20px, -2px);
+		background-image: url(./img/arrow.png);
+		background-repeat: no-repeat;
+		background-size: contain;
+		vertical-align: middle;
+	}
+
+	.playButton:hover:after {
+		content: '';
+		display: inline-block;
+		background-image: url(./img/arrow__white.png);
+		background-repeat: no-repeat;
+		background-size: contain;
+		vertical-align: middle;
+	}
+
+	.moreView::after {
+		content: '';
+		display: inline-block;
+		width: 15px;
+		height: 15px;
+		transform: translate(20px, -2px);
+		background-image: url(./img/arrow.png);
+		background-repeat: no-repeat;
+		background-size: contain;
+		vertical-align: middle;
+	}
+
+	.moreView:hover:after {
+		content: '';
+		display: inline-block;
+		background-image: url(./img/arrow__white.png);
+		background-repeat: no-repeat;
+		background-size: contain;
+		vertical-align: middle;
+	}
+
+	.operation::after {
+		position: absolute;
+		content: '';
+		display: inline-block;
+		width: 11vw;
+		height: 11vw;
+		transform: translate(20px, -2px);
+		background-image: url(./img/circle5.png);
+		background-repeat: no-repeat;
+		background-size: contain;
+		vertical-align: middle;
+		z-index: 0;
+	}
+
+	@media (max-width: 475px) {
+		.firstview__text {
+			font-size: 16px;
+			top: 13.5%;
+		}
+	}
+</style>
+
 <body>
-    {% extends 'base.html' %}{% block content %}
-    <main class="privacypolicy">
-        <h2>About Us</h1>
-        <p>
-            けんくん、ここ頼みます！
-        </p>
-        
-    </main>
-    {% endblock %}
+	<header>
+		<nav class=" z-10 relative flex flex-wrap items-center justify-between px-2 py-3 bg-[#414143] mb-3">
+			<div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
+                <a href="/quiztop">
+				<div
+					class="w-full relative flex justify-between lg:w-auto  px-4 lg:static lg:block lg:justify-start flex-1">
+					<img src="../static/images/logo.png" class="w-40 h-17.5">
+				</div>
+                </a>
+				<div class="flex flex-grow items-center flex-1" id="example-navbar-warning">
+					<ul class="flex flex-col lg:flex-row list-none ml-auto">
+						<li class="nav-item">
+							<div class="bg-white rounded-[5px]">
+								<a class=" px-4 py-3 font flex items-center text-xs uppercase font-bold leading-snug hover:opacity-75 sm:px-7 sm:py-4"
+									href="mailto:matsumura@kyoto-seika.ac.jp">
+									お問い合わせ
+								</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<main class="-translate-y-[70px]">
+		<div class="relative bg-[#F1F1F4] pb-[15vh]">
+            
+			<img src="../static/images/logo__big.png" class="logo__big"
+				style="position: relative; position: absolute; top: 7%; left: 50%; transform: translateX(-50%); -webkit-transform: translateX(-50%); -ms-transform: translateX(-50%);">
+			<h2 class="firstview__text whitespace-nowrap  lg:text-[32px] sm:text-[24px] text-[18px] font-bold text-center"
+				style="position: absolute; left: 50%; transform: translateX(-50%); -webkit-transform: translateX(-50%); -ms-transform: translateX(-50%);">
+				様々なジャンルのアニメのクイズを答えて<br>アニメの実力を測ろう！</h2>
+			<div class="text-center">
+				<a href="http://ec2-15-152-169-7.ap-northeast-3.compute.amazonaws.com/home" target="_blank"><button
+						class=" playButton sm:px-20 sm:py-5 text-[#1E22B0] bg-white border border-solid border-[#1E22B0] hover:bg-[#1E22B0] hover:text-white active:bg-[#1E22B0] font-bold uppercase rounded-[5px] whitespace-nowrap outline-none focus:outline-none mr-1 mb-10 ease-linear transition-all duration-150  px-10 py-2.5"
+						type="button"
+						style="position: absolute; top: 21%; left: 50%; transform: translateX(-50%); -webkit-transform: translateX(-50%); -ms-transform: translateX(-50%);">今すぐプレイ</button></a>
+			</div>
+			<!-- <img src="./img/firstview.png" class="object-cover object-center min-h-[70vh] sm:h-screen"> -->
+			<picture>
+				<source srcset="./img/firstview.png" media="(min-width: 1000px)"
+					class="object-cover object-center min-h-[75vh] sm:h-screen">
+				<source srcset="./img/firstview__tb.png" media="(min-width: 475px)"
+					class="object-cover object-center min-h-[75vh] sm:h-screen">
+				<img src="../static/images/firstview__sm.png" alt="スマホ用ファーストビュー"
+					class="object-cover object-center min-h-[75vh] sm:h-screen">
+			</picture>
+			<div class="relative bg-[#F1F1F4] mt-[85px]">
+				<h2 class="text-center text-[32px] text-[#1E22B0] font-bold sm:text-[48px]">Anime Quizの特徴</h2>
+				<img src="../static/images/circle1.png" class="absolute right-0 -top-0 lg:-top-40 w-[30vw]">
+			</div>
+			<div class="container  px-6 py-10 mx-auto flex justify-center items-center">
+				<div class="lg:-mx-6 lg:flex lg:items-center lg:justify-center z-10">
+					<img src="../static/images/Group156.png" alt="#"
+						class="object-cover object-center w-400 h-140 lg:w-1/2  w-full lg:mx-6">
+					<div class="mt-8 lg:w-1/2 lg:px-6 lg:mt-0">
+						<h1
+							class="text-2xl font-semibold text-gray-800  lg:text-3xl lg:w-96">
+							さまざまなジャンルのクイズに挑戦
+						</h1>
+
+						<p class="max-w-lg mt-6 text-gray-500 ">
+							人気にあるアニメからマニアックなものまで様々なジャンルのクイズを用意しています。<br>
+							自分の好きなところからトライしてください。
+						</p>
+					</div>
+				</div>
+			</div>
+			<div
+				class="relative container px-6 py-10 mx-auto flex flex-col items-center lg:flex-row lg:items-center">
+				<img src="../static/images/circle2.png" class="absolute left-0 z-10 w-[16vw]">
+				<div class="mt-8 w-full lg:w-1/2 lg:px-6 lg:mt-0 order-2 lg:order-1 z-10">
+					<h1 class="text-2xl font-semibold text-gray-800  lg:text-3xl lg:w-96">
+						クイズは簡単な選択式
+					</h1>
+					<p class="max-w-lg mt-6 text-gray-500 ">
+						基本的に選択式のクイズになります。<br>
+						さくさくと解いていろんな問題に挑戦してみましょう。
+					</p>
+				</div>
+				<img src="../static/images/Group156.png" alt="#"
+					class="object-cover object-center w-400 h-140 lg:w-1/2 w-full lg:w-400 lg:mx-6 order-1 lg:order-2 z-10">
+			</div>
+			<div class="relative container px-6 py-10 mx-auto flex justify-center items-center">
+				<img src="../static/images/circle3.png" class="absolute -top-[10%] left-[35%] w-[5vw]">
+				<div class="lg:-mx-6 lg:flex lg:items-center lg:justify-center z-10">
+					<img src="../static/images/about__img--three.png" alt="#"
+						class="object-cover object-center w-400 h-140 lg:w-1/2  w-full lg:mx-6">
+
+					<div class="mt-8 lg:w-1/2 lg:px-6 lg:mt-0 z-10">
+						<h1
+							class="text-2xl font-semibold text-gray-800  lg:text-3xl lg:w-96">
+							テスト結果が確認できます
+						</h1>
+
+						<p class="max-w-lg mt-6 text-gray-500 ">
+							過去のスコアを確認できるので、
+							自分の知識の上達が一目で
+							わかります。
+						</p>
+					</div>
+				</div>
+				<img src="../static/images/circle4.png" class="absolute top-[70%] right-[29%] w-[7vw] z-0">
+			</div>
+		</div>
+		<div class="bg-gray-600 pt-[70px]">
+			<h2 class="operation text-center text-[32px] text-white font-bold sm:text-[48px]">運営組織</h2>
+			<div class="relative container px-6 py-10 mx-auto flex justify-center items-center">
+				<div class="lg:-mx-6 lg:flex lg:items-center lg:justify-center z-10">
+					<img src="../static/images/media__img.jpg" alt="#"
+						class="object-cover object-center w-400 h-140 lg:w-1/2  w-full lg:mx-6">
+
+					<div class="mt-8 lg:w-1/2 lg:px-6 lg:mt-0">
+						<h1 class="text-2xl font-semibold text-white lg:text-3xl lg:w-96">
+							松村ゼミ
+						</h1>
+
+						<p class="max-w-lg mt-6 text-white ">
+							京都精華大学メディア表現学部にある松村ゼミを中心に学生を主体として開発しています。
+						</p>
+					</div>
+				</div>
+				<img src="../static/images/circle6.png" class="absolute -top-[7%] left-0 w-[16vw]">
+				<img src="../static/images/circle7.png" class="absolute top-[60%] right-[14%] w-[12vw]">
+				<img src="../static/images/circle8.png" class="absolute top-[90%] right-0 w-[6vw]">
+
+			</div>
+			<div class="text-center">
+				<button
+					class=" moreView sm:px-20 sm:py-5 text-[#1E22B0] bg-white border border-solid border-[#1E22B0] hover:bg-[#1E22B0] hover:text-white active:bg-[#1E22B0] font-bold uppercase rounded-[5px] outline-none focus:outline-none mr-1 mb-10 ease-linear transition-all duration-150  px-10 py-2.5"
+					type="button">詳しく見る
+				</button>
+			</div>
+		</div>
+		<div class="text-center py-[60px] bg-[#F1F1F4]">
+			<button
+				class=" sm:px-20 sm:py-5 text-[#1E22B0] bg-white border border-solid hover:bg-[#1E22B0] border-[#1E22B0] hover:text-white active:bg-[#1E22B0] font-bold uppercase rounded-[5px] outline-none focus:outline-none mr-1 mb-15 ease-linear transition-all duration-150  px-10 py-2.5"
+				type="button">お問い合わせ
+			</button>
+		</div>
+	</main>
 </body>
+
 </html>
