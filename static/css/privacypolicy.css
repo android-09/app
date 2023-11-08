@@ -1,0 +1,34 @@
+.privacypolicy {
+    padding:0 16%;
+}
+
+.privacypolicy h2{
+    padding: 40px 0;
+}
+
+.privacypolicy h3{
+    padding: 10px 0;
+}
+
+.privacypolicy section{
+    margin: 36px 0;
+}
+
+.privacypolicy p, .privacypolicy ul{
+    margin-top: 10px;
+}
+
+.privacypolicy p{
+    font-size: 14px;
+}
+
+.privacypolicy li{
+    font-size: 14px;
+    list-style: none;
+}
+
+
+
+.privacypolicy section{
+    margin: 30px 0;
+}

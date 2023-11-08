@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="/static/css/style_detail.css" />
+</head>
+<body>
+	<!-- {%include "navbar.html"%} -->
+	{% extends 'base.html' %}{% block content %}
+	<div class="box"></div>
+	<h2 class="heading-031">クイズ一覧</h2>
+	<br>
+	<div class="table-container">
+		<table class="quiz_table">
+			<tr>
+				<th class="small_space">ID</th>
+				<th class="small_font">クイズID</th>
+				<th>問題</th>
+				<th>選択肢1</th>
+				<th>選択肢2</th>
+				<th>選択肢3</th>
+				<th>選択肢4</th>
+				<th>コメント</th>
+				<th>イメージ</th>
+				<th class="small_space small_font">編集</th>
+				<th class="small_space small_font">削除</th>
+			</tr>
+			{% for det in select_alldetail %}
+			<tr class="display">
+				<td class="center_space">{{ det[0] }}</td>
+				<!-- <td class="center_space">{{ det[1] }}</td> -->
+				<td class="small_font">
+					{% for info in quiz_all %}
+						{% if info[0] == det[1] %}
+							{{ info[1] }} (Difficulty: {{ info[2] }})
+						{% endif %}
+					{% endfor %}
+				</td>
+				<td>{{ det[2] }}</td>
+				<td>{{ det[3] }}</td>
+				<td>{{ det[4] }}</td>
+				<td>{{ det[5] }}</td>
+				<td>{{ det[6] }}</td>
+				<td>{{ det[7] }}</td>
+				<td>{{ det[8] }}</td>
+				<td class="small_space center_space">
+					<button id="button_css2" class="edit-button" data-id="{{ det[0] }}">Edit</button>
+				</td>
+				<td class="small_space center_space">
+					<form id="delete-form" method="POST" action="/deletedetail">
+						<input type="hidden" name="delete_id" id="delete_id" value="{{ det[0] }}">
+						<button id="button_css2" class="delete-button">Del</button>
+					</form>
+				</td>
+			</tr>
+			<tr class="edit-form" id="edit-form-{{ det[0] }}" style="display: none;">
+				<td colspan="9">
+					<form method="POST" action="/updatedetail">
+						<input id="editId_input" type="text" name="update_id" value="{{ det[0] }}" readonly>
+						<!-- <input class="small_input" type="text" name="update_quiz_id" value="{{ det[1] }}"> -->
+						<select name="update_quiz_id" class="select_color">
+							{% for info in quiz_all %}
+							<option value="{{ info[0] }}" {% if info[0] == det[1] %} selected {% endif %}>
+								{{ info[1] }} (Difficulty: {{ info[2] }})
+							</option>
+							{% endfor %}
+						</select>
+						<input type="text" name="update_question" value="{{ det[2] }}">
+						<input type="text" name="update_selection1" value="{{ det[3] }}">
+						<input type="text" name="update_selection2" value="{{ det[4] }}">
+						<input type="text" name="update_selection3" value="{{ det[5] }}">
+						<input type="text" name="update_selection4" value="{{ det[6] }}">
+						<input type="text" name="update_comment" value="{{ det[7] }}">
+						<input type="text" name="update_image" value="{{ det[8] }}">
+						<button type="submit" class="save-button">Save</button>
+					</form>
+				</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</div>
+	<br>
+	<p>（IDは変更できません）</p>
+	<div class="box"></div>
+	<div class="add_box">
+		<h2  class="heading-031">クイズの追加</h2>
+		<form method="POST" action="adddetailadmin">
+			<table class="table">
+				<td>
+					<select name="quiz_id">
+						{% for info in quiz_all %}
+						<option value="{{ info[0] }}">
+							{{ info[1] }} (Difficulty: {{ info[2] }})
+						</option>
+						{% endfor %}
+					</select>
+				</td>
+				<td><input placeholder="question" type="text" name="question"></td>
+				<td><input placeholder="selection1" type="text" name="selection1"></td>						
+				<td><input placeholder="selection2" type="text" name="selection2"></td>		
+				<td><input placeholder="selection3" type="text" name="selection3"></td>		
+				<td><input placeholder="selection4" type="text" name="selection4"></td>			
+				<td><input placeholder="comment" type="text" name="comment"></td>			
+				<td><input placeholder="image" type="text" name="image"></td>			
+				<td><input id="button_css" type="submit"></button></td>
+			</table>
+		</form>
+	</div>
+	<div class="box"></div>
+	{% endblock %}
+	<script>
+		document.querySelectorAll('.edit-button').forEach(button => {
+			button.addEventListener('click', (event) => {
+				const editFormId = `edit-form-${event.target.dataset.id}`;
+				const editForm = document.getElementById(editFormId);
+				editForm.style.display = 'table-row';
+			});
+		});
+		document.querySelectorAll('.delete-button').forEach(button => {
+			button.addEventListener('click', (event) => {
+				const form = event.target.closest("form");
+				const result = window.confirm("クリックした行を削除しますか？")
+				if(result){
+					form.submit();
+				} else {
+					console.log("データが送信出来ませんでした。");
+				}
+			});
+		});
+	</script>
+</body>
+</html>

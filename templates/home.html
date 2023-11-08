@@ -1,66 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="/static/images/style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    {%include "navbar.html"%}
-    <main>
-      <div id="mainDiv">
-        <div class="imgDiv"><img src="/static/images/quiz.png" alt="" /></div>
-        <div class="infoDiv">
-          <form method="POST" action="adduser">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th><p>Create Account:</p></th>
-                </tr>
-              </thead>
 
-              <!-- <tr>
-                        
-                        <td><input placeholder="Id" type="text" name="id" id=""></td>
-                    </tr> -->
-              <tr>
-                <td>
-                  <input placeholder="Name" type="text" name="name" id=""  />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <input placeholder="Email" type="text" name="email" id=""  />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <input
-                    placeholder="Password"
-                    type="password"
-                    name="password"
-                    id=""
-                    style="color: white; padding-left: 10px;"
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td><button>Submit</button></td>
-              </tr>
-            </table>
-          </form>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登録ページ</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 0;
+        }
+
+        .register-container {
+            background: linear-gradient(to bottom, #414143 20%, #fff 10%);
+            padding: 20px;
+            border-radius: 2%;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 40%;
+            position: relative;
+        }
+
+        .service-name {
+            color: #fff;
+            padding: 10px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .validation {
+            background-color: rgb(255, 212, 204);
+            color: #D73332;
+            width: 100%;
+            height: 50px;
+            z-index: 1;
+            position: absolute;
+            left: 0;
+            display: none;
+        }
+
+        /* .input-container_name {
+            margin-top: 20px;
+        } */
+
+        .input-container_name label {
+            display: block;
+            font-weight: bold;
+        }
+
+        .input-container_name input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 3px;
+        }
+
+        .input-container_mail label {
+            display: block;
+            font-weight: bold;
+        }
+
+        .input-container_mail input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 3px;
+        }
+
+        .input-container_pass label {
+            display: block;
+            font-weight: bold;
+        }
+
+        .input-container_pass input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 3px;
+        }
+
+        .register-button {
+            background-color: #3B4556;
+            color: #fff;
+            padding: 15px 50px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .register-link_adress {
+            color: gray;
+        }
+
+        .register-button:hover {
+            background-color: #91a9d3;
+        }
+
+        .register-link {
+            margin-top: 20px;
+            margin-bottom: 50px;
+            font-size: 14px;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f0f0f0;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+        }
+
+        .footer a {
+            color: #888;
+            margin: 0 10px;
+        }
+
+        input.name {
+            background-image: url(../static/images/user.svg);
+            background-repeat: no-repeat;
+            background-size: 30px;
+            background-position: 20px;
+            background-color: #E5E5E5;
+            border: none;
+            border-radius: 0%;
+            height: 60px;
+            width: 60%;
+            padding-left: 60px;
+        }
+
+        input.mail {
+            background-image: url(../static/images/mail.svg);
+            background-repeat: no-repeat;
+            background-size: 30px;
+            background-position: 20px;
+            background-color: #E5E5E5;
+            border: none;
+            border-radius: 0%;
+            height: 60px;
+            width: 60%;
+            padding-left: 60px;
+        }
+
+        input.pass {
+            background-image: url(../static/images/rock.svg);
+            background-repeat: no-repeat;
+            background-size: 30px;
+            background-position: 20px;
+            background-color: #E5E5E5;
+            border: none;
+            border-radius: 0%;
+            margin-bottom: 30px;
+            height: 60px;
+            width: 60%;
+            padding-left: 60px;
+        }
+
+        input::placeholder {
+            padding-left: 10px;
+        }
+
+        ::placeholder {
+            color: #A3A3A3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="register-container">
+        <div class="service-name"><img src="../static/images/logo.png" alt="logo" height="auto" width="120px"></div>
+        <div class="validation">
+            <p class="validation_text">メールアドレスはすでに登録されています。</p>
         </div>
-      </div>
-    </main>
-    <footer>
-      <div><p>copyright</p></div>
-    </footer>
-  </body>
+        <br><br><br>
+        <form method="POST" action="adduser">
+            <div class="input-container_name">
+                <input type="text" id="" name="name" class="name" placeholder="Name">
+            </div>
+
+            <div class="input-container_mail">
+                <input type="mail" id="" name="email" class="mail" placeholder="Mail">
+            </div>
+
+            <div class="input-container_pass">
+                <input type="password" id="" name="password" class="pass" placeholder="Password">
+            </div>
+
+            <button type="submit" class="register-button">Sign up</button>
+        </form>
+
+        <div class="register-link">
+            <a href="login" class="register-link_adress">Already have an account?</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a> | <a href="#">Contact Us</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &copy; Cschool All Rights Reserved
+    </div>
+</body>
+
 </html>

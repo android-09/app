@@ -13,7 +13,7 @@
     />
   </head>
   <body>
-    {%include "navbar.html"%}
+    {% extends 'base.html' %}{% block content %}
     <main>
       <div id="mainDiv">
         <div class="imgDiv"><img src="/static/images/quiz.png" alt="" /></div>
@@ -94,5 +94,6 @@
     <footer>
       <div><p>copyright</p></div>
     </footer>
+    {% endblock %}
   </body>
 </html>

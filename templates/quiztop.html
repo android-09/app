@@ -1,0 +1,29 @@
+{% extends 'base.html' %} {% block content %}
+  <body>
+    <h2>あなたがチャレンジした問題</h2>
+    <table>
+      <tr>
+        <td>時間</td>
+        <td>タイトル</td>
+        <td>正解率</td>
+      </tr>
+      {% for history in user_history %}
+      <tr>
+        <td>{{history[4]}}</td>
+        <td>{{history[2]}}</td>
+        <td>{{history[3]}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <h2>すべての検定</h2>
+    <ul>
+      {% for quiz in quiz_all %}
+      <li>
+        問題：{{quiz[1]}}
+        <a href="/quiz?quiz_id={{quiz[0]}}">クイズをする</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+{% endblock %}
